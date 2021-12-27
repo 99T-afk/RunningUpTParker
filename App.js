@@ -82,9 +82,9 @@ function MyTabs() {
         options={{
           headerShown: false,
           marginTop: StatusBar.currentHeight || 0,
-        }}
-      />
-      <StackNav.Screen
+        }}      
+      />     
+            <StackNav.Screen
         name="TrackingScreen"
         component={TrackingScreen}
         options={{
@@ -99,7 +99,7 @@ function MyTabs() {
           headerShown: false,
           marginTop: StatusBar.currentHeight || 0,
         }}
-      />
+      />    
     </StackNav.Navigator>
   );
 };
@@ -108,10 +108,15 @@ export default function App() {
   const [context, setContext] = useState("default context value");
   return (
     <Context.Provider value={[context, setContext]}>
+      
       <NavigationContainer>
+      <View style={styles.topbar}>
+      </View>
         <StackNavComponent/>
       </NavigationContainer>
+      
     </Context.Provider>
+    
   );
 }
 
@@ -132,3 +137,10 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
   },
 });
+
+
+/*
+
+
+
+      */
