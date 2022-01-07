@@ -105,13 +105,14 @@ function MyTabs() {
 };
 
 export default function App() {
-  const [context, setContext] = useState("default context value");
+  contextArr = [0,0,0,0,0,0]
+  const [context, setContext] = useState(contextArr);
   return (
     <Context.Provider value={[context, setContext]}>
       
       <NavigationContainer>
-      <View style={styles.topbar}>
-      </View>
+        <View style={styles.topbar}>
+        </View>
         <StackNavComponent/>
       </NavigationContainer>
       

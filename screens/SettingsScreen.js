@@ -7,10 +7,11 @@
  /**
   * TESTING SCREEN
   */
- export default function SettingsScreen() {
-     return (
-       <View style={{ flex: 1}}>
+export default function SettingsScreen() {
+  
+    return (
+      <View style={{ flex: 1}}>
           
-       </View>
-     );
-   }
+      </View>
+    );
+  }

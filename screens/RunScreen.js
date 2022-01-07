@@ -2,8 +2,9 @@
  * @fileoverview - Returns the run screen, which renders components for tracking steps
  */
  import React, { useState } from 'react';
+ import { Context } from "../components/Context.js";
  import { StatusBar } from 'expo-status-bar';
- import { StyleSheet, Text, View, TextInput, Alert } from 'react-native';
+ import { StyleSheet, Text, View, TextInput, Alert, Keyboard, TouchableWithoutFeedback } from 'react-native';
  import { TouchableOpacity } from "react-native-gesture-handler";
  import PedometerComp from '../components/PedometerComp';
 import { Button } from 'react-native-web';
@@ -11,14 +12,28 @@ import { Button } from 'react-native-web';
  /**
   * TESTING SCREEN
   */
+  const DismissKeyboard = ({ children }) => (
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      {children}
+    </TouchableWithoutFeedback>
+  );
+
 export default function RunScreen() {
+  //const [context, setContext] = useContext(Context);
   const [recordingAction, recordingActionUpdate] = useState("Button");
-  const [stepHeight, onChangeStepHeight] = React.useState(null);
-  const [stepCount, onChangeStepCount] = React.useState(null);
+  const [stepHeight, onChangeStepHeight] = useState(0);
+  const [stepCount, onChangeStepCount] = useState(0);
+  const [stepHeightToday, onChangeStepHeightToday] = useState(0);
+  const [stepCountToday, onChangeStepCountToday] = useState(0);
 
      return (
+      <DismissKeyboard>
        <View>
             <View style={styles.topbar}>
+              <View style={styles.walkingText}>
+                <Text style={styles.statisticText}>Steps today: {stepCountToday}</Text>
+                <Text style={styles.statisticText}>Height today: {stepHeightToday} </Text>        
+              </View>
               <Text style={styles.titleStyle}>Select the recording action:</Text>
               <View style={styles.containerSettings}>
                 <View
@@ -63,7 +78,7 @@ export default function RunScreen() {
                         style={{ height: "100%" }}
                         onPress={(theme) => {
                           alert(
-                            "Please note - this is currently only availabe on IOS."
+                            "Please note - this is currently only available on IOS."
                           );
                           recordingActionUpdate("Pedometer");
                         }}
@@ -75,30 +90,30 @@ export default function RunScreen() {
                 </View>
               </View>
 
+              </View>
+
             <View style={{marginTop: 80, padding: 10,}}>
-            <TouchableOpacity
-              style={styles.completedStepBox}
-            >
+            <TouchableOpacity style={styles.completedStepBox}>
               <Text style={styles.textStyle}>Completed a trip</Text>
             </TouchableOpacity>
+            
             <TextInput
               style={styles.input}
-              onChangeText={onChangeStepHeight}
+              onChangeText={stepHeight => onChangeStepHeight(stepHeight)}
               value={stepHeight}
               placeholder="Step Height (cm)"
               keyboardType="numeric"
             />
             <TextInput
               style={styles.input}
-              onChangeText={onChangeStepCount}
+              onChangeText={stepCount => onChangeStepCount(stepCount)}
               value={stepCount}
               placeholder="Step count"
               keyboardType="numeric"
-            />
+            />    
             </View>
-
           </View>
-          </View>
+      </DismissKeyboard>
      );
    }
 
@@ -147,4 +162,7 @@ const styles = StyleSheet.create({
     padding: 10,
     height: 200,
   },
+  walkingText: {
+    marginTop: 28,   
+  } 
 });
