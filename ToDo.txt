@@ -1,0 +1,11 @@
+TODO:
+
+- Add update function for steps
+
+- Save steps to DB
+
+- Fix pedometer
+
+- Add FAQ section
+
+- Add gifs for explanation

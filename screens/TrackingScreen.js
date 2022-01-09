@@ -43,6 +43,7 @@ export default function TrackingScreen() {
   //console.log("Previous data: " + previousData);
   //console.log(previousData[0].heightTaken);
 
+  /*
   console.log("lists: " + previousData.length);
   //does the list exist already
   var wasNotPresentQ = true;
@@ -81,7 +82,7 @@ export default function TrackingScreen() {
 
   SQL_out.getAllPreviousStepsDB();
   //
-
+  
 
      return (
        <View>

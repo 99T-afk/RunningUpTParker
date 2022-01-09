@@ -12,28 +12,37 @@ import { Button } from 'react-native-web';
  /**
   * TESTING SCREEN
   */
-  const DismissKeyboard = ({ children }) => (
+const DismissKeyboard = ({ children }) => (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       {children}
     </TouchableWithoutFeedback>
   );
 
+  /*
+const AddSteps = () => {
+  var newStepVerticalToday = (stepHeight * stepCount) / 100;
+  var newStepCountToday = (stepCount * 2) + stepCount
+  onChangeStepCountToday(newStepCountToday);
+  onChangeStepVerticalToday(newStepVerticalToday);
+}
+*/
+
 export default function RunScreen() {
   //const [context, setContext] = useContext(Context);
   const [recordingAction, recordingActionUpdate] = useState("Button");
-  const [stepHeight, onChangeStepHeight] = useState(0);
-  const [stepCount, onChangeStepCount] = useState(0);
-  const [stepHeightToday, onChangeStepHeightToday] = useState(0);
+  const [stepHeight, onChangeStepHeight] = useState(20);
+  const [stepCount, onChangeStepCount] = useState(5);
+  const [stepVerticalToday, onChangeStepVerticalToday] = useState(0);
   const [stepCountToday, onChangeStepCountToday] = useState(0);
 
      return (
       <DismissKeyboard>
        <View>
+            <View style={styles.walkingText}>
+              <Text style={styles.statisticText}>Steps today: {stepCountToday}</Text>
+              <Text style={styles.statisticText}>Height today: {stepVerticalToday} </Text>        
+            </View>
             <View style={styles.topbar}>
-              <View style={styles.walkingText}>
-                <Text style={styles.statisticText}>Steps today: {stepCountToday}</Text>
-                <Text style={styles.statisticText}>Height today: {stepHeightToday} </Text>        
-              </View>
               <Text style={styles.titleStyle}>Select the recording action:</Text>
               <View style={styles.containerSettings}>
                 <View
@@ -93,21 +102,30 @@ export default function RunScreen() {
               </View>
 
             <View style={{marginTop: 80, padding: 10,}}>
-            <TouchableOpacity style={styles.completedStepBox}>
+            <TouchableOpacity 
+              style={styles.completedStepBox}
+              onPress={() => {
+                var newStepVerticalToday = ((stepHeight / 100) * stepCount) + stepVerticalToday;
+                var newStepCountToday = (stepCount * 2) + stepCountToday;
+                onChangeStepCountToday(newStepCountToday);
+                onChangeStepVerticalToday(newStepVerticalToday); 
+                alert("This was hit!")
+              }}
+              >
               <Text style={styles.textStyle}>Completed a trip</Text>
             </TouchableOpacity>
             
             <TextInput
               style={styles.input}
               onChangeText={stepHeight => onChangeStepHeight(stepHeight)}
-              value={stepHeight}
+              value={stepHeight.toString()}
               placeholder="Step Height (cm)"
               keyboardType="numeric"
             />
             <TextInput
               style={styles.input}
               onChangeText={stepCount => onChangeStepCount(stepCount)}
-              value={stepCount}
+              value={stepCount.toString()}
               placeholder="Step count"
               keyboardType="numeric"
             />    
