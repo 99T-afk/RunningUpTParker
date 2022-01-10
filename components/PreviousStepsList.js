@@ -34,7 +34,7 @@ const Item = ({ item, onPress, backgroundColor, textColor }) => (
  */
 const PreviousStepsList = ({allData}) => {
   const [selectedId, setSelectedId] = useState(null);
-  console.log("allData: " + allData);
+  console.log("allData in steplist: " + allData);
 
 
   /**

@@ -29,7 +29,7 @@ class SQL_functions{
 
     addNewSteps(dateStep, stepsTaken, heightTaken){
         db.transaction(tx => {
-            tx.executeSql('INSERT INTO previousSteps (dateStep, stepsTaken, heightTaken) values (?, ?, ?)', [dateStep, stepsTaken, heightTaken], (txObj, data ) => {console.log(data)},
+            tx.executeSql('INSERT INTO previousSteps (dateStep, stepsTaken, heightTaken) values (?, ?, ?)', [dateStep, stepsTaken, heightTaken], (txObj, data ) => {console.log("added row: " + data)},
             () => {console.log("addNewSteps Error")},
             )
         });

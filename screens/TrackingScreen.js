@@ -40,14 +40,20 @@ export default function TrackingScreen() {
 
   //SQL_out.addNewSteps(today, stepsTaken, heightTaken);
 
+
+
   const [allData, onChangeAllData] = useState("allDataDefault");
   console.log(allData);
   if (allData == "allDataDefault") { //will only run once
     SQL_out.getAllPreviousStepsDB(onChangeAllData);
   }
 
-
+  console.log("alldata length: " + allData.length)
   
+  if (allData.length == 0) { //empty
+    SQL_out.addNewSteps(today, 0, 0);
+  }
+
   //does the list exist already
   var wasNotPresentQ = true;
 
@@ -66,7 +72,7 @@ export default function TrackingScreen() {
     
   }
   
-
+/*
   for (let index = 0; index < allData.length; index++) {
     if(allData[index].dateStep == today){
       SQL_out.addNewSteps(today, 3333, 4444);
