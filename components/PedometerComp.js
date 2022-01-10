@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Pedometer } from 'expo-sensors';
+import { Context } from "../components/Context.js";
 
 
 export default class PedometerComp extends React.Component {
@@ -60,6 +61,7 @@ export default class PedometerComp extends React.Component {
   };
 
   render() {
+    
     console.log("render reached")
     return (
       <View style={styles.container}>

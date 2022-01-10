@@ -139,7 +139,7 @@ export default function RunScreen() {
               keyboardType="numeric"
             />    
             </View>
-            <PedometerComp></PedometerComp>
+            <PedometerComp style={{flex: 1}}></PedometerComp>
           </View>
       </DismissKeyboard>
      );

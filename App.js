@@ -12,6 +12,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import TrackingScreen from "./screens/TrackingScreen";
 import RunScreen from "./screens/RunScreen";
 import SettingsScreen from "./screens/SettingsScreen";
+import PedometerScreen from "./screens/PedometerScreen";
 
 
 const Tab = createMaterialTopTabNavigator();
@@ -43,6 +44,17 @@ function MyTabs() {
         name="Run"
         component={RunScreen}
       />
+      <Tab.Screen
+        options={{
+          headerShown: false,
+          tabBarLabel: "Pedometer",
+          tabBarIcon: ({ color, size }) => (
+            <AntDesign name="linechart" size={24} color="black" />
+          ),
+        }}
+        name="Pedometer"
+        component={PedometerScreen}
+        />
       <Tab.Screen
         options={{
           headerShown: false,
@@ -83,7 +95,15 @@ function MyTabs() {
           headerShown: false,
           marginTop: StatusBar.currentHeight || 0,
         }}      
-      />     
+      />
+            <StackNav.Screen
+        name="PedometerScreen"
+        component={PedometerScreen}
+        options={{
+          headerShown: false,
+          marginTop: StatusBar.currentHeight || 0,
+        }}
+      />
             <StackNav.Screen
         name="TrackingScreen"
         component={TrackingScreen}
