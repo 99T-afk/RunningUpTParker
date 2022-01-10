@@ -20,12 +20,10 @@ let data = getLocations();
  */
 const Item = ({ item, onPress, backgroundColor, textColor }) => (
   <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
-    <View>
-      <Text style={[styles.title, textColor]}>{item.name}</Text>
-      <Text style={[styles.smalltext, textColor]}>{item.distance}</Text>
-    </View>
-    <View style={styles.weatherIcon}>
-      <Text>{data[item.id]["temp"]} °C</Text>
+    <View style={styles.itembox}>
+      <Text style={[styles.title, textColor]}>{item.dateStep}</Text>
+      <Text style={[styles.title, textColor]}>{item.heightTaken}m</Text>
+      <Text style={[styles.title, textColor]}>{item.stepsTaken} steps</Text>
     </View>
   </TouchableOpacity>
 );
@@ -34,15 +32,17 @@ const Item = ({ item, onPress, backgroundColor, textColor }) => (
  * PreviousStepsList - Contains the code for defining and rendering a flatlist
  * @returns A flatlist component.
  */
-const PreviousStepsList = () => {
+const PreviousStepsList = ({allData}) => {
   const [selectedId, setSelectedId] = useState(null);
+  console.log("allData: " + allData);
+
 
   /**
    * A function that handles updating the global context and changing the navigation 
    * @param {*} item object that contains data on the location tapped
    */
   function OnPressHandle(item) {
-    alert("pressed!");
+    //alert("pressed!");
   }
 
   /**
@@ -69,7 +69,7 @@ const PreviousStepsList = () => {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={data}
+        data={allData}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
         extraData={selectedId}
@@ -99,8 +99,13 @@ const styles = StyleSheet.create({
   smalltext: {
     fontSize: 12,
   },
+  itembox: {
+    flex: 1,
+    justifyContent: "space-between",
+    flexDirection: "row"
+  },
   title: {
-    fontSize: 23,
+    fontSize: 19,
   },
   weatherIcon: {
     marginRight: "2%",

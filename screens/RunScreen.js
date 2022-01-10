@@ -4,10 +4,9 @@
  import React, { useState } from 'react';
  import { Context } from "../components/Context.js";
  import { StatusBar } from 'expo-status-bar';
- import { StyleSheet, Text, View, TextInput, Alert, Keyboard, TouchableWithoutFeedback } from 'react-native';
- import { TouchableOpacity } from "react-native-gesture-handler";
+ import { StyleSheet, Text, View, TextInput, Alert, Keyboard, TouchableWithoutFeedback, TouchableOpacity, Button } from 'react-native';
+ //import { TouchableOpacity } from "react-native-gesture-handler";
  import PedometerComp from '../components/PedometerComp';
-import { Button } from 'react-native-web';
  
  /**
   * TESTING SCREEN
@@ -40,7 +39,7 @@ export default function RunScreen() {
        <View>
             <View style={styles.walkingText}>
               <Text style={styles.statisticText}>Steps today: {stepCountToday}</Text>
-              <Text style={styles.statisticText}>Height today: {stepVerticalToday} </Text>        
+              <Text style={styles.statisticText}>Height today: {stepVerticalToday}m</Text>        
             </View>
             <View style={styles.topbar}>
               <Text style={styles.titleStyle}>Select the recording action:</Text>
@@ -109,21 +108,21 @@ export default function RunScreen() {
                 var newStepCountToday = (stepCount * 2) + stepCountToday;
                 onChangeStepCountToday(newStepCountToday);
                 onChangeStepVerticalToday(newStepVerticalToday); 
-                alert("This was hit!")
               }}
               >
               <Text style={styles.textStyle}>Completed a trip</Text>
             </TouchableOpacity>
-            
+            <Text style={styles.inputIn}>Step height (cm): </Text>
             <TextInput
-              style={styles.input}
+              style={styles.inputIn}
               onChangeText={stepHeight => onChangeStepHeight(stepHeight)}
               value={stepHeight.toString()}
               placeholder="Step Height (cm)"
               keyboardType="numeric"
             />
+            <Text style={styles.inputIn}>Step count: </Text>
             <TextInput
-              style={styles.input}
+              style={styles.inputIn}
               onChangeText={stepCount => onChangeStepCount(stepCount)}
               value={stepCount.toString()}
               placeholder="Step count"
@@ -147,6 +146,12 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     marginRight: 5,
     flex: 1,
+  },
+  inputIn: {
+    flexDirection: "row"
+  },
+  statisticText: {
+    fontSize: 22,
   },
   outerBoxStyle: {
     backgroundColor: "#fffefc",
