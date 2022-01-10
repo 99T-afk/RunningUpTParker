@@ -3,7 +3,8 @@
  */
  import * as React from 'react';
  import { View } from 'react-native';
- 
+ import PedometerComp from '../components/PedometerComp';
+
  /**
   * TESTING SCREEN
   */
@@ -11,7 +12,7 @@ export default function SettingsScreen() {
   
     return (
       <View style={{ flex: 1}}>
-          
+          <PedometerComp></PedometerComp>
       </View>
     );
   }

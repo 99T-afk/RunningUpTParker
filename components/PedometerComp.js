@@ -63,7 +63,7 @@ export default class PedometerComp extends React.Component {
     console.log("render reached")
     return (
       <View style={styles.container}>
-        <Text>Pedometer.isAvailableAsync(): {this.state.isPedometerAvailable}</Text>
+        <Text style={styles.pedometerText}>Pedometer.isAvailableAsync(): {this.state.isPedometerAvailable}</Text>
         <Text>Steps taken in the last 24 hours: {this.state.pastStepCount}</Text>
         <Text>Walk! And watch this go up: {this.state.currentStepCount}</Text>
       </View>
@@ -79,6 +79,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 10,
   },
+  pedometerText: {
+    fontSize: 20,
+  }
 });
 
 /*

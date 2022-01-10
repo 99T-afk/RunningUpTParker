@@ -62,7 +62,7 @@ export default function TrackingScreen() {
     console.log("Loop " + index + " - allData: " + allData[index].dateStep + "  |||| today: " + today);
     if(allData[index].dateStep == today && wasNotPresentQ == true){
       console.log("IF HIT : Loop " + index)
-      SQL_out.updateSteps(stepsTaken, heightTaken, today);
+      SQL_out.updateSteps(today, stepsTaken, heightTaken);
       wasNotPresentQ = false;
     }
   }

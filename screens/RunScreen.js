@@ -97,8 +97,18 @@ export default function RunScreen() {
                   </View>
                 </View>
               </View>
-
+                    
               </View>
+            
+              <View
+                      style={
+                        (styles.opacityStyle,
+                        { flex: 1, height: 50 },
+                        recordingAction == "Button"
+                          ? { backgroundColor: "#fff", flex: 1, height: 60 }
+                          : { backgroundColor: "#54c3ff", flex: 1, height: 0 })
+                      }
+                    ><Text>Show if Pedometer active</Text></View>
 
             <View style={{marginTop: 80, padding: 10,}}>
             <TouchableOpacity 
@@ -129,6 +139,7 @@ export default function RunScreen() {
               keyboardType="numeric"
             />    
             </View>
+            <PedometerComp></PedometerComp>
           </View>
       </DismissKeyboard>
      );
