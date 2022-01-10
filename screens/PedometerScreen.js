@@ -1,8 +1,8 @@
 /**
  * @fileoverview - Returns the homescreen, which calls a flatlist component to render.
  */
- import * as React from 'react';
- import { View } from 'react-native';
+ import React, { useState, useContext } from "react";
+ import { View, Text } from 'react-native';
  import PedometerComp from '../components/PedometerComp';
  import PedometerFunc from '../components/PedometerFunc';
  import { Context } from '../components/Context.js';

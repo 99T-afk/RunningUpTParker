@@ -126,7 +126,7 @@ function MyTabs() {
 
 export default function App() {
   var contextArr = [0,0,0,0,0,0]; //update with later
-  const [context, setContext] = useState(0);
+  const [context, setContext] = useState(contextArr); //was 0
   return (
     <Context.Provider value={[context, setContext]}>
       

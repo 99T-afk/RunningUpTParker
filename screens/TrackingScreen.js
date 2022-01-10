@@ -26,7 +26,7 @@ export default function TrackingScreen() {
   
   //SQL_out.clearDB();
   
-  //SQL_out.createDatabase();
+  SQL_out.createDatabase();
 
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
@@ -47,12 +47,19 @@ export default function TrackingScreen() {
   if (allData == "allDataDefault") { //will only run once
     SQL_out.getAllPreviousStepsDB(onChangeAllData);
   }
+  console.log(allData);
 
-  console.log("alldata length: " + allData.length)
-  
-  if (allData.length == 0) { //empty
+  //console.log("alldata length: " + allData.length)
+  try{
+    if (allData.length == 0) { //empty
+      SQL_out.addNewSteps(today, 0, 0);
+      SQL_out.getAllPreviousStepsDB(onChangeAllData);
+    }
+  }catch{
     SQL_out.addNewSteps(today, 0, 0);
+    SQL_out.getAllPreviousStepsDB(onChangeAllData);
   }
+  
 
   //does the list exist already
   var wasNotPresentQ = true;

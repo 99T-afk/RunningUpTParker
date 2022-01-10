@@ -1,12 +1,12 @@
 /**
  * @fileoverview - Returns the run screen, which renders components for tracking steps
  */
- import React, { useState } from 'react';
- import { Context } from "../components/Context.js";
+ import React, { useState, useContext } from 'react';
  import { StatusBar } from 'expo-status-bar';
  import { StyleSheet, Text, View, TextInput, Alert, Keyboard, TouchableWithoutFeedback, TouchableOpacity, Button } from 'react-native';
  //import { TouchableOpacity } from "react-native-gesture-handler";
  import PedometerComp from '../components/PedometerComp';
+ import { Context } from '../components/Context';
  
  /**
   * TESTING SCREEN
@@ -33,12 +33,13 @@ export default function RunScreen() {
   const [stepCount, onChangeStepCount] = useState(5);
   const [stepVerticalToday, onChangeStepVerticalToday] = useState(0);
   const [stepCountToday, onChangeStepCountToday] = useState(0);
+  const [context, setContext] = useContext(Context);
 
      return (
       <DismissKeyboard>
        <View>
             <View style={styles.walkingText}>
-              <Text style={styles.statisticText}>Steps today: {stepCountToday}</Text>
+              <Text style={styles.statisticText}>Steps today: {stepCountToday + context}</Text>
               <Text style={styles.statisticText}>Height today: {stepVerticalToday}m</Text>        
             </View>
             <View style={styles.topbar}>
@@ -139,7 +140,6 @@ export default function RunScreen() {
               keyboardType="numeric"
             />    
             </View>
-            <PedometerComp style={{flex: 1}}></PedometerComp>
           </View>
       </DismissKeyboard>
      );
