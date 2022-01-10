@@ -3,7 +3,7 @@
  */
  import * as React from 'react';
  import { View, Text } from 'react-native';
- import PedometerComp from '../components/PedometerComp';
+ //import PedometerComp from '../components/PedometerComp';
 
  /**
   * TESTING SCREEN
