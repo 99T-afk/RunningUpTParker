@@ -25,10 +25,10 @@ const StackNav = createNativeStackNavigator();
 function MyTabs() {
   return (
     <Tab.Navigator
-      activeColor="#fff"
-      inactiveColor="#000000"
+      activeColor="#ff7c3b"
+      inactiveColor="#ffffff"
       tabBarPosition="bottom"
-      barStyle={{ backgroundColor: "#54c3ff" }}
+      barStyle={{ backgroundColor: "#ff7c3b" }}
       screenOptions={{
         tabBarItemStyle: { height: 60 },
       }}
@@ -38,7 +38,7 @@ function MyTabs() {
           headerShown: false,
           tabBarLabel: "Run",
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome5 name="running" size={24} color="black" />
+            <FontAwesome5 name="running" size={24} color="#ff7c3b" />
           ),
         }}
         name="Run"
@@ -49,7 +49,7 @@ function MyTabs() {
           headerShown: false,
           tabBarLabel: "Track",
           tabBarIcon: ({ color, size }) => (
-            <AntDesign name="linechart" size={24} color="black" />
+            <AntDesign name="linechart" size={24} color="#ff7c3b" />
           ),
         }}
         name="Track"
@@ -60,7 +60,7 @@ function MyTabs() {
           tabBarLabel: "Settings",
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <Entypo name="cog" size={24} color="black" />
+            <Entypo name="cog" size={24} color="#ff7c3b" />
           ),
         }}
         name="Settings"
@@ -106,11 +106,12 @@ function MyTabs() {
 };
 
 export default function App() {
-  var contextArr = {
+  var contextObject = {
     stepsToday: 0,
     stepVerticalToday: 0
   }; //update with later
-  const [context, setContext] = useState(0); //was 0
+  var contextArr = [0,0]
+  const [context, setContext] = useState(contextArr); //was 0
   return (
     <Context.Provider value={[context, setContext]}>
       

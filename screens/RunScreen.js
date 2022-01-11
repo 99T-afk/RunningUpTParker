@@ -47,7 +47,7 @@ export default function RunScreen() {
             <View style={styles.walkingText}>
               <Text style={styles.statisticText}>Steps from button: {stepCountToday}</Text>
               <Text style={styles.statisticText}>Steps from pedometer: {context}</Text>
-              <Text style={styles.statisticText}>Total Steps: {context + stepCountToday}</Text>
+              <Text style={styles.statisticText}>Total Steps: {stepCountToday + context}</Text>
               <Text style={styles.statisticText}>Height today: {stepVerticalToday}m</Text>        
             </View>
             <View>
@@ -70,7 +70,7 @@ export default function RunScreen() {
                           { flex: 1, height: 50 },
                           recordingAction == false
                             ? { backgroundColor: "#fff", flex: 1, height: 60 }
-                            : { backgroundColor: "#54c3ff", flex: 1, height: 60 })
+                            : { backgroundColor: "#ff7c3b", flex: 1, height: 60 })
                         }
                       >
                         <TouchableOpacity
@@ -89,7 +89,7 @@ export default function RunScreen() {
                           { flex: 1, height: 50 },
                           recordingAction == true
                             ? { backgroundColor: "#fff", flex: 1, height: 60 }
-                            : { backgroundColor: "#54c3ff", flex: 1, height: 60 })
+                            : { backgroundColor: "#ff7c3b", flex: 1, height: 60 })
                         }
                       >
                         <TouchableOpacity

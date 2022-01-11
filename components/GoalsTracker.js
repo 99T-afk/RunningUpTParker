@@ -6,20 +6,22 @@ let goalData = getGoals();
 
 export default function GoalsTracker({stepVerticalToday}){
     console.log("Goal tracker ran!")
-    var nextGoalLocation = "";
+    var nextGoalName = "";
     var nextGoalElevation = 0;
+    var nextGoalLocation = "";
 
     for (let index = 0; index < goalData.length; index++) {
         if(goalData[index].elevation > stepVerticalToday){
-            nextGoalLocation = goalData[index].name;
+            nextGoalName = goalData[index].name;
             nextGoalElevation = goalData[index].elevation;
+            nextGoalLocation = goalData[index].location;
             break;
         }              
     }
 
     return(
         <View>
-            <Text>Your next goal: {nextGoalLocation} is {nextGoalElevation}m tall!</Text>
+            <Text>Your next goal: {nextGoalName}, located at {nextGoalLocation}, is {nextGoalElevation}m tall!</Text>
         </View>
     )
 }

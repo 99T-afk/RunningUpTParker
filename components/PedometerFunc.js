@@ -14,7 +14,12 @@ export default function PedometerFunc() {
   const _subscribe = () => {
     _subscription = Pedometer.watchStepCount(result => {
       setCurrentStepCount(result.steps);
-      setContext(result.steps);
+      //if breaks, setContext(result.steps)
+      var tempArr = context;
+      console.log("tempArr: " + tempArr);
+      tempArr.stepsToday = result.steps;
+      console.log("tempArr: " + tempArr);
+      setContext(tempArr);
     });
 
     Pedometer.isAvailableAsync().then(
