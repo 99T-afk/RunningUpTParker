@@ -37,6 +37,7 @@ export default function RunScreen() {
   const [stepVerticalToday, onChangeStepVerticalToday] = useState(0);
   const [stepCountToday, onChangeStepCountToday] = useState(0);
   const context = useContext(Context);
+  console.log(">>> context.stepVerticalToday: " +context.stepVerticalToday);
 
 //<StepsHeightDisplay stepVerticalToday={stepVerticalToday} stepCountToday={stepCountToday}/>
 
@@ -47,10 +48,10 @@ export default function RunScreen() {
               <Text style={styles.statisticText}>Steps from button: {stepCountToday}</Text>
               <Text style={styles.statisticText}>Steps from pedometer: {context.stepsToday}</Text>
               <Text style={styles.statisticText}>Total Steps: {stepCountToday + context.stepsToday}</Text>
-              <Text style={styles.statisticText}>Height today: {stepVerticalToday}m</Text>        
+              <Text style={styles.statisticText}>Height today: {context.stepVerticalToday}m</Text>        
             </View>
               <View style={styles.topbar}>
-              <GoalsTracker stepVerticalToday = {stepVerticalToday}/>
+              <GoalsTracker stepVerticalToday = {context.stepVerticalToday}/>
                   <Text style={styles.titleStyle}>Select the recording action:</Text>
                   {!recordingAction ? <Text>Using Button!</Text> : <Text>Using Pedometer!</Text> }
                   <View style={styles.buttonContainer}>        
@@ -83,6 +84,11 @@ export default function RunScreen() {
                   var newStepCountToday = (stepCount * 2) + stepCountToday;
                   onChangeStepCountToday(newStepCountToday);
                   onChangeStepVerticalToday(newStepVerticalToday);     
+
+                  
+
+                  var stepHeight = context.stepsHeightOfSteps
+                  context.addVerticalToday(1, stepHeight);
 
                   context.addStepsToday(10);
                 }}

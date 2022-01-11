@@ -39,10 +39,8 @@ function getAllPreviousStepsDB() {
 
 
 export default function TrackingScreen() {
-  console.log(Context)
   const context = useContext(Context);
 
-  console.log("asdfasdfasdfasdfa");
   //SQL_out.clearDB();
 
   

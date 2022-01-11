@@ -109,6 +109,7 @@ export default function App() {
   const [context, setContext] = useState(0); //was 0
 
   const [stepsToday, setStepsToday] = useState(0);
+  const [stepVerticalToday, setVerticalToday] = useState(0);
 
 
   const contextObject = {
@@ -117,9 +118,13 @@ export default function App() {
       addition += stepsToday;
       setStepsToday(addition);
     },
-    stepVerticalToday: 0,
+    stepVerticalToday: stepVerticalToday,
+    addVerticalToday: (verticalAdd, height) => {
+      verticalAdd = stepVerticalToday + (verticalAdd * (height / 100));
+      setVerticalToday(Math.round(verticalAdd * 100) / 100)
+    },
     stepsCount: 0,
-    stepsHeightOfSteps: 0
+    stepsHeightOfSteps: 15
   }
 
   return (

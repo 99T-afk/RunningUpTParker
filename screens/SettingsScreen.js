@@ -11,18 +11,8 @@
 export default function SettingsScreen() {
   const [recordingAction, recordingActionUpdate] = useState(false);
     return (
-      <View style={styles.buttonContainer}>        
-        <TouchableOpacity
-          style={styles.buttonSwitch}
-          onPress={console.log("pressed!")}>
-        <Text>Press Here</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.buttonSwitch}
-          OnPress={console.log("pressed!")}>
-        <Text>Press here too!</Text>
-        </TouchableOpacity>
+      <View>
+        
       </View>
     );
   }
