@@ -47,17 +47,6 @@ function MyTabs() {
       <Tab.Screen
         options={{
           headerShown: false,
-          tabBarLabel: "Pedometer",
-          tabBarIcon: ({ color, size }) => (
-            <AntDesign name="linechart" size={24} color="black" />
-          ),
-        }}
-        name="Pedometer"
-        component={PedometerScreen}
-        />
-      <Tab.Screen
-        options={{
-          headerShown: false,
           tabBarLabel: "Track",
           tabBarIcon: ({ color, size }) => (
             <AntDesign name="linechart" size={24} color="black" />
@@ -95,14 +84,6 @@ function MyTabs() {
           headerShown: false,
           marginTop: StatusBar.currentHeight || 0,
         }}      
-      />
-            <StackNav.Screen
-        name="PedometerScreen"
-        component={PedometerScreen}
-        options={{
-          headerShown: false,
-          marginTop: StatusBar.currentHeight || 0,
-        }}
       />
             <StackNav.Screen
         name="TrackingScreen"

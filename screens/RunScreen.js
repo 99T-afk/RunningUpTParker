@@ -8,7 +8,10 @@
  import PedometerComp from '../components/PedometerComp';
  import { Context } from '../components/Context';
  import StepsHeightDisplay from '../components/StepsHeightDisplay';
- 
+import PedometerFunc from '../components/PedometerFunc';
+import GoalsTracker from '../components/GoalsTracker'; 
+
+
  /**
   * TESTING SCREEN
   */
@@ -29,7 +32,7 @@ const AddSteps = () => {
 
 export default function RunScreen() {
   //const [context, setContext] = useContext(Context);
-  const [recordingAction, recordingActionUpdate] = useState("Button");
+  const [recordingAction, recordingActionUpdate] = useState(true); //true = button
   const [stepHeight, onChangeStepHeight] = useState(20);
   const [stepCount, onChangeStepCount] = useState(5);
   const [stepVerticalToday, onChangeStepVerticalToday] = useState(0);
@@ -47,87 +50,82 @@ export default function RunScreen() {
               <Text style={styles.statisticText}>Total Steps: {context + stepCountToday}</Text>
               <Text style={styles.statisticText}>Height today: {stepVerticalToday}m</Text>        
             </View>
+            <View>
             <View style={styles.topbar}>
-              <Text style={styles.titleStyle}>Select the recording action:</Text>
-              <View style={styles.containerSettings}>
-                <View
-                  style={[
-                    styles.container,
-                    {
-                      flexDirection: "row",
-                    },
-                  ]}
-                >
-                  <View style={styles.outerBoxStyle}>
-                    <View
-                      style={
-                        (styles.opacityStyle,
-                        { flex: 1, height: 50 },
-                        recordingAction == "Pedometer"
-                          ? { backgroundColor: "#fff", flex: 1, height: 60 }
-                          : { backgroundColor: "#54c3ff", flex: 1, height: 60 })
-                      }
-                    >
-                      <TouchableOpacity
-                        theme="Button"
-                        style={{ height: "100%" }}
-                        onPress={() => {
-                          recordingActionUpdate("Button");
-                        }}
+            <GoalsTracker stepVerticalToday = {stepVerticalToday}/>
+                <Text style={styles.titleStyle}>Select the recording action:</Text>
+                <View style={styles.containerSettings}>
+                  <View
+                    style={[
+                      styles.container,
+                      {
+                        flexDirection: "row",
+                      },
+                    ]}
+                  >
+                    <View style={styles.outerBoxStyle}>
+                      <View
+                        style={
+                          (styles.opacityStyle,
+                          { flex: 1, height: 50 },
+                          recordingAction == false
+                            ? { backgroundColor: "#fff", flex: 1, height: 60 }
+                            : { backgroundColor: "#54c3ff", flex: 1, height: 60 })
+                        }
                       >
-                        <Text style={styles.textStyle}>Button</Text>
-                      </TouchableOpacity>
-                    </View>
-                    <View
-                      style={
-                        (styles.opacityStyle,
-                        { flex: 1, height: 50 },
-                        recordingAction == "Button"
-                          ? { backgroundColor: "#fff", flex: 1, height: 60 }
-                          : { backgroundColor: "#54c3ff", flex: 1, height: 60 })
-                      }
-                    >
-                      <TouchableOpacity
-                        theme="Pedometer"
-                        style={{ height: "100%" }}
-                        onPress={(theme) => {
-                          alert(
-                            "Please note - this is currently only available on IOS."
-                          );
-                          recordingActionUpdate("Pedometer");
-                        }}
+                        <TouchableOpacity
+                          theme="Button"
+                          style={{ height: "100%" }}
+                          onPress={() => {
+                            recordingActionUpdate(true);
+                          }}
+                        >
+                          <Text style={styles.textStyle}>Button</Text>
+                        </TouchableOpacity>
+                      </View>
+                      <View
+                        style={
+                          (styles.opacityStyle,
+                          { flex: 1, height: 50 },
+                          recordingAction == true
+                            ? { backgroundColor: "#fff", flex: 1, height: 60 }
+                            : { backgroundColor: "#54c3ff", flex: 1, height: 60 })
+                        }
                       >
-                        <Text style={styles.textStyle}>Pedometer</Text>
-                      </TouchableOpacity>               
+                        <TouchableOpacity
+                          theme="Pedometer"
+                          style={{ height: "100%" }}
+                          onPress={(theme) => {
+                            alert(
+                              "Please note - this is currently only available on IOS."
+                            );
+                            recordingActionUpdate(false);
+                          }}
+                        >
+                          <Text style={styles.textStyle}>Pedometer</Text>
+                        </TouchableOpacity>               
+                      </View>
                     </View>
                   </View>
-                </View>
+                </View>          
               </View>
-                    
               </View>
-            
-              <View
-                      style={
-                        (styles.opacityStyle,
-                        { flex: 1, height: 50 },
-                        recordingAction == "Button"
-                          ? { backgroundColor: "#fff", flex: 1, height: 60 }
-                          : { backgroundColor: "#54c3ff", flex: 1, height: 0 })
-                      }
-                    ><Text>Show if Pedometer active</Text></View>
-
-            <View style={{marginTop: 80, padding: 10,}}>
-            <TouchableOpacity 
-              style={styles.completedStepBox}
-              onPress={() => {
-                var newStepVerticalToday = ((stepHeight / 100) * stepCount) + stepVerticalToday;
-                var newStepCountToday = (stepCount * 2) + stepCountToday;
-                onChangeStepCountToday(newStepCountToday);
-                onChangeStepVerticalToday(newStepVerticalToday);     
-              }}
-              >
+              <View>{!recordingAction ? (<PedometerFunc></PedometerFunc>) : 
+              <View style={{marginTop: 100}}><TouchableOpacity 
+                style={styles.completedStepBox}
+                onPress={() => {
+                  var newStepVerticalToday = ((stepHeight / 100) * stepCount) + stepVerticalToday;
+                  var newStepCountToday = (stepCount * 2) + stepCountToday;
+                  onChangeStepCountToday(newStepCountToday);
+                  onChangeStepVerticalToday(newStepVerticalToday);     
+                }}
+                >
               <Text style={styles.textStyle}>Completed a trip</Text>
-            </TouchableOpacity>
+              
+            </TouchableOpacity></View> }</View>
+
+            <View>
+            
             <Text style={styles.inputIn}>Step height (cm): </Text>
             <TextInput
               style={styles.inputIn}
@@ -200,6 +198,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     height: 200,
+    paddingTop: 90,
   },
   walkingText: {
     marginTop: 28,   

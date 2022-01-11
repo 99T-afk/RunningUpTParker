@@ -7,6 +7,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import PreviousStepsList from '../components/PreviousStepsList';
 import * as SQLite from 'expo-sqlite';
 import SQL_out from '../components/DB_Functions';
+import GoalsTracker from '../components/GoalsTracker';
  
 const db = SQLite.openDatabase("db.db");
 

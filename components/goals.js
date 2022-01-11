@@ -1,4 +1,4 @@
-[
+const Goals = [
     {
         "name" : "Mount Tenpō",
         "elevation" : 4.53,
@@ -50,3 +50,9 @@
         "location" : "Nepal"
     },
 ]
+
+const getGoals = () => {
+    return Goals;
+}
+
+export default getGoals;
