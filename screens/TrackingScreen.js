@@ -3,7 +3,7 @@
  */
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import PreviousStepsList from '../components/PreviousStepsList';
 import * as SQLite from 'expo-sqlite';
 import SQL_out from '../components/DB_Functions';
@@ -23,6 +23,12 @@ function getAllPreviousStepsDB() {
   return allData;
 }
 
+function AddOrUpdateSteps(){
+  console.log("AddOrUpdateSteps called");
+
+
+}
+
 export default function TrackingScreen() {
   
   //SQL_out.clearDB();
@@ -35,8 +41,8 @@ export default function TrackingScreen() {
   var yyyy = today.getFullYear();
   today = dd + '/' + mm + '/' + yyyy;
 
-  var stepsTaken = 1111;
-  var heightTaken = 2222;
+  var stepsTaken = 3;
+  var heightTaken = 4;
 
 
   //SQL_out.addNewSteps(today, stepsTaken, heightTaken);
@@ -101,12 +107,18 @@ export default function TrackingScreen() {
   });
 
   */
+
+
   return (
     <View>
       <View style={styles.container}>
         <Text style={styles.statisticText}>Total Steps: </Text>
         <Text style={styles.statisticText}>Total Height: </Text>        
       </View>
+      <Button
+        title="Add data from today"
+        onPress={() => AddOrUpdateSteps()}
+      />
       <View style={{height: "80%"}}>
         {allData == "allDataDefault" ? <Text>No data to load!</Text> : <PreviousStepsList allData={allData}/>}
       </View>
