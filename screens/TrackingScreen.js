@@ -1,11 +1,12 @@
 /**
  * @fileoverview - Returns the homescreen, which calls a flatlist component to render.
  */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import PreviousStepsList from '../components/PreviousStepsList';
 import * as SQLite from 'expo-sqlite';
+import { Context } from '../components/Context';
 import SQL_out from '../components/DB_Functions';
 import GoalsTracker from '../components/GoalsTracker';
  
@@ -30,7 +31,7 @@ function AddOrUpdateSteps(){
 }
 
 export default function TrackingScreen() {
-  
+  const [context, setContext] = useContext(Context);
   //SQL_out.clearDB();
   
   SQL_out.createDatabase();
@@ -112,7 +113,7 @@ export default function TrackingScreen() {
   return (
     <View>
       <View style={styles.container}>
-        <Text style={styles.statisticText}>Total Steps: </Text>
+        <Text style={styles.statisticText}>Total Steps: {context}</Text>
         <Text style={styles.statisticText}>Total Height: </Text>        
       </View>
       <Button
