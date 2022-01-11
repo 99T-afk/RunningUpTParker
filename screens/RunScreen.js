@@ -7,6 +7,7 @@
  //import { TouchableOpacity } from "react-native-gesture-handler";
  import PedometerComp from '../components/PedometerComp';
  import { Context } from '../components/Context';
+ import StepsHeightDisplay from '../components/StepsHeightDisplay';
  
  /**
   * TESTING SCREEN
@@ -35,11 +36,15 @@ export default function RunScreen() {
   const [stepCountToday, onChangeStepCountToday] = useState(0);
   const [context, setContext] = useContext(Context);
 
+//<StepsHeightDisplay stepVerticalToday={stepVerticalToday} stepCountToday={stepCountToday}/>
+
      return (
       <DismissKeyboard>
        <View>
             <View style={styles.walkingText}>
-              <Text style={styles.statisticText}>Steps today: {stepCountToday + context}</Text>
+              <Text style={styles.statisticText}>Steps from button: {stepCountToday}</Text>
+              <Text style={styles.statisticText}>Steps from pedometer: {context}</Text>
+              <Text style={styles.statisticText}>Total Steps: {context + stepCountToday}</Text>
               <Text style={styles.statisticText}>Height today: {stepVerticalToday}m</Text>        
             </View>
             <View style={styles.topbar}>
@@ -118,7 +123,7 @@ export default function RunScreen() {
                 var newStepVerticalToday = ((stepHeight / 100) * stepCount) + stepVerticalToday;
                 var newStepCountToday = (stepCount * 2) + stepCountToday;
                 onChangeStepCountToday(newStepCountToday);
-                onChangeStepVerticalToday(newStepVerticalToday); 
+                onChangeStepVerticalToday(newStepVerticalToday);     
               }}
               >
               <Text style={styles.textStyle}>Completed a trip</Text>

@@ -1,10 +1,12 @@
 TODO:
 
+- save data to context
+
 - Add update function for steps
 
 - Save steps to DB
 
-- Fix pedometer
+- Fix pedometer (works on iphone)
 
 - Add FAQ section
 
