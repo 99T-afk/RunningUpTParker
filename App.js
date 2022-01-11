@@ -111,7 +111,7 @@ export default function App() {
     stepVerticalToday: 0
   }; //update with later
   var contextArr = [0,0]
-  const [context, setContext] = useState(contextArr); //was 0
+  const [context, setContext] = useState(0); //was 0
   return (
     <Context.Provider value={[context, setContext]}>
       

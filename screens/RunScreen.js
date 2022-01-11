@@ -3,7 +3,7 @@
  */
  import React, { useState, useContext } from 'react';
  import { StatusBar } from 'expo-status-bar';
- import { StyleSheet, Text, View, TextInput, Alert, Keyboard, TouchableWithoutFeedback, TouchableOpacity, Button } from 'react-native';
+ import { StyleSheet, Text, View, TextInput, Alert, Keyboard, TouchableWithoutFeedback, TouchableOpacity, Button, Platform } from 'react-native';
  //import { TouchableOpacity } from "react-native-gesture-handler";
  import PedometerComp from '../components/PedometerComp';
  import { Context } from '../components/Context';
@@ -32,7 +32,7 @@ const AddSteps = () => {
 
 export default function RunScreen() {
   //const [context, setContext] = useContext(Context);
-  const [recordingAction, recordingActionUpdate] = useState(true); //true = button
+  const [recordingAction, recordingActionUpdate] = useState(false); //true = button
   const [stepHeight, onChangeStepHeight] = useState(20);
   const [stepCount, onChangeStepCount] = useState(5);
   const [stepVerticalToday, onChangeStepVerticalToday] = useState(0);
@@ -96,10 +96,15 @@ export default function RunScreen() {
                           theme="Pedometer"
                           style={{ height: "100%" }}
                           onPress={(theme) => {
-                            alert(
-                              "Please note - this is currently only available on IOS."
-                            );
+                            if(Platform.OS === "android"){
+                              alert(
+                                "Please note - this is currently only available on IOS."
+                              );
+                            } else {
+                              recordingActionUpdate(false);
+                            }
                             recordingActionUpdate(false);
+                            
                           }}
                         >
                           <Text style={styles.textStyle}>Pedometer</Text>
@@ -110,7 +115,7 @@ export default function RunScreen() {
                 </View>          
               </View>
               </View>
-              <View>{!recordingAction ? (<PedometerFunc></PedometerFunc>) : 
+              <View>{!recordingAction ? (<View style={{marginTop: 100}}><PedometerFunc></PedometerFunc></View>) : 
               <View style={{marginTop: 100}}><TouchableOpacity 
                 style={styles.completedStepBox}
                 onPress={() => {
