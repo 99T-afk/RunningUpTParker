@@ -106,23 +106,30 @@ function MyTabs() {
 };
 
 export default function App() {
-  var contextObject = {
-    stepsToday: 0,
-    stepVerticalToday: 0
-  }; //update with later
-  var contextArr = [0,0]
   const [context, setContext] = useState(0); //was 0
+
+  const [stepsToday, setStepsToday] = useState(0);
+
+
+  const contextObject = {
+    stepsToday: stepsToday,
+    addStepsToday: (addition) => {
+      addition += stepsToday;
+      setStepsToday(addition);
+    },
+    stepVerticalToday: 0,
+    stepsCount: 0,
+    stepsHeightOfSteps: 0
+  }
+
   return (
-    <Context.Provider value={[context, setContext]}>
-      
+    <Context.Provider value={contextObject}>     
       <NavigationContainer>
         <View style={styles.topbar}>
         </View>
         <StackNavComponent/>
-      </NavigationContainer>
-      
-    </Context.Provider>
-    
+      </NavigationContainer>     
+    </Context.Provider>  
   );
 }
 

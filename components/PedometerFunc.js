@@ -7,7 +7,7 @@ export default function PedometerFunc() {
   const [isPedometerAvailable, setIsPedometerAvailable] = useState('checking');
   const [pastStepCount, setPastStepCount] = useState(0);
   const [currentStepCount, setCurrentStepCount] = useState(0);
-  const [context, setContext] = useContext(Context);
+
 
   let _subscription;
 
@@ -15,14 +15,7 @@ export default function PedometerFunc() {
     _subscription = Pedometer.watchStepCount(result => {
       setCurrentStepCount(result.steps);
       //if breaks, setContext(result.steps)
-      setContext(result.steps)
-      /*
-      var tempArr = context;
-      console.log("tempArr: " + tempArr);
-      tempArr.stepsToday = result.steps;
-      console.log("tempArr: " + tempArr);
-      setContext(tempArr);
-      */
+
     });
 
     Pedometer.isAvailableAsync().then(

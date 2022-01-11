@@ -36,7 +36,7 @@ export default function RunScreen() {
   const [stepCount, onChangeStepCount] = useState(5);
   const [stepVerticalToday, onChangeStepVerticalToday] = useState(0);
   const [stepCountToday, onChangeStepCountToday] = useState(0);
-  const [context, setContext] = useContext(Context);
+  const context = useContext(Context);
 
 //<StepsHeightDisplay stepVerticalToday={stepVerticalToday} stepCountToday={stepCountToday}/>
 
@@ -45,8 +45,8 @@ export default function RunScreen() {
        <View>
             <View style={styles.walkingText}>
               <Text style={styles.statisticText}>Steps from button: {stepCountToday}</Text>
-              <Text style={styles.statisticText}>Steps from pedometer: {context}</Text>
-              <Text style={styles.statisticText}>Total Steps: {stepCountToday + context}</Text>
+              <Text style={styles.statisticText}>Steps from pedometer: {context.stepsToday}</Text>
+              <Text style={styles.statisticText}>Total Steps: {stepCountToday + context.stepsToday}</Text>
               <Text style={styles.statisticText}>Height today: {stepVerticalToday}m</Text>        
             </View>
               <View style={styles.topbar}>
@@ -75,7 +75,7 @@ export default function RunScreen() {
             </View>
               
               <View>{recordingAction ? (<View style={{marginTop: 50}}><PedometerFunc></PedometerFunc></View>) : 
-              <View style={{marginTop: 100}}>
+              <View style={{marginTop: "5%"}}>
                 <TouchableOpacity 
                 style={styles.completedStepBox}
                 onPress={() => {
@@ -83,6 +83,8 @@ export default function RunScreen() {
                   var newStepCountToday = (stepCount * 2) + stepCountToday;
                   onChangeStepCountToday(newStepCountToday);
                   onChangeStepVerticalToday(newStepVerticalToday);     
+
+                  context.addStepsToday(10);
                 }}
                 >
               <Text style={styles.textStyle}>Completed a trip</Text>
