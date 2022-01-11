@@ -19,7 +19,6 @@ class SQL_functions{
     }
 
     getAllPreviousStepsDB(setNewData){
-        console.log("func")
         db.transaction(tx => {
             tx.executeSql('SELECT * FROM previousSteps', null, (txObj, data ) => {console.log("here");setNewData(data.rows._array)},
             () => {console.log("Error - Select all failed")},

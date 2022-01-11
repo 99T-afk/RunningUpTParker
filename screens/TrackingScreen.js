@@ -53,9 +53,11 @@ export default function TrackingScreen() {
 
 
   const [allData, onChangeAllData] = useState("allDataDefault");
+  const [updateData, changeUpdateData] = useState(true);
   console.log(allData);
-  if (allData == "allDataDefault") { //will only run once
+  if (updateData) { //will only run once
     SQL_out.getAllPreviousStepsDB(onChangeAllData);
+    changeUpdateData(false);
   }
   console.log(allData);
 
@@ -71,31 +73,32 @@ export default function TrackingScreen() {
   //get all records, if today is blank, create a row
   //if today is present, update with current data IF new data is greater.
   const AddOrUpdateSteps = (allData) => {
-  console.log("AddOrUpdateSteps called");
-  
-  //GET DATA HERE FROM CONTEXT
-  var stepsToday = 170;
-  var verticalToday = 90;
+    console.log("AddOrUpdateSteps called");
+    
+    //GET DATA HERE FROM CONTEXT
+    var stepsToday = context.stepsToday;
+    var verticalToday = context.stepVerticalToday;
 
-  var today = getTodayFormatted();
+    var today = getTodayFormatted();
 
-  var doesDateExistQ = false;
-  for (let index = 0; index < allData.length; index++) {
-    if(allData[index].dateStep == today){
-      //is today, update
-      var newSteps = allData[index].stepsTaken + stepsToday //<<<< ADD STEPS FROM CONTEXT
-      var newHeight = allData[index].heightTaken + verticalToday //<<<< ADD HEIGHT FROM CONTEXT
-      SQL_out.updateSteps(today, newSteps, newHeight);  
-      doesDateExistQ = true;    
+    var doesDateExistQ = false;
+    for (let index = 0; index < allData.length; index++) {
+      if(allData[index].dateStep == today){
+        //is today, update
+        var newSteps = allData[index].stepsTaken + stepsToday //<<<< ADD STEPS FROM CONTEXT
+        var newHeight = allData[index].heightTaken + verticalToday //<<<< ADD HEIGHT FROM CONTEXT
+        SQL_out.updateSteps(today, newSteps, newHeight);  
+        doesDateExistQ = true;    
+      }
     }
-  }
 
-  //no record exists, create one for today
-  if(doesDateExistQ == false){
-    SQL_out.addNewSteps(today, stepsToday, verticalToday);
-  }
+    //no record exists, create one for today
+    if(doesDateExistQ == false){
+      SQL_out.addNewSteps(today, stepsToday, verticalToday);
+    }
 
-  //reset the steps added?
+
+    changeUpdateData(true);
   }
 
   
