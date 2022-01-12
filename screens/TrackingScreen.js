@@ -82,11 +82,6 @@ export default function TrackingScreen() {
   }
 
 
-
-
-
-
-
   //get all records, if today is blank, create a row
   //if today is present, update with current data IF new data is greater.
   const AddOrUpdateSteps = (allData) => {
@@ -148,7 +143,6 @@ export default function TrackingScreen() {
 
   return (
     <View>
-      <TouchableOpacity onPress={() => getTheGoals()}>
       <View style={styles.container}>
         <Text style={styles.statisticText}>Total Steps: <Text style={{fontWeight: 'bold'}}>{TotalStepCount}</Text></Text>
         <Text style={styles.statisticText}>Total Height: <Text style={{fontWeight: 'bold'}}>{TotalHeight}m</Text></Text>        
@@ -164,7 +158,6 @@ export default function TrackingScreen() {
       <View style={{height: "60%"}}>
         {allData == "allDataDefault" ? <Text>No data to load!</Text> : <PreviousStepsList allData={allData}/>}
       </View>
-      </TouchableOpacity>
     </View>
      );
    }
