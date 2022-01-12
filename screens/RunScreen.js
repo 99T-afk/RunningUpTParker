@@ -62,7 +62,7 @@ export default function RunScreen() {
                     <View style={styles.outerBoxStyle}>
                       <View
                         style={
-                          (styles.opacityStyle, { flex: 1, height: 50 })}
+                          (styles.opacityStyle, { flex: 1, height: 60 })}
                       >
                         <TouchableOpacity
                           theme="Button"
@@ -73,7 +73,7 @@ export default function RunScreen() {
                       </View>
                       <View
                         style={
-                          (styles.opacityStyle, { flex: 1, height: 50 })}                      
+                          (styles.opacityStyle, { flex: 1, height: 60 })}                      
                       >
                         <TouchableOpacity
                           theme="Pedometer"
@@ -88,7 +88,9 @@ export default function RunScreen() {
 
             
               <View style={styles.topbar}>
+              <View style={{marginLeft: 5, marginRight: 5}}>
               <GoalsTracker stepVerticalToday = {context.stepVerticalToday}/>
+              </View>
                   <Text style={styles.titleStyle}>Select the recording action:</Text>              
                   <View style={styles.buttonContainer}>        
                     <TouchableOpacity
@@ -146,10 +148,10 @@ export default function RunScreen() {
 
 const styles = StyleSheet.create({
   topbar: {
-    marginTop: StatusBar.currentHeight || 120,
+    marginTop: StatusBar.currentHeight || 100,
   },
   bumperTopBar: {
-    marginTop: 30
+    marginTop: 20
   },
   imageStyle: {
     width: 100,
@@ -161,7 +163,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    padding: 10,
+    padding: 5,
   },
   containerSettings: {
     marginLeft: 5,
@@ -179,7 +181,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     borderWidth: 3,
     borderRadius: 5,
-    height: 66,
+    height: 70,
     width: "100%",
   },
   opacityStyle: {
@@ -187,17 +189,17 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 5,
     alignSelf: "center",
     justifyContent: "center",
-    height: 53,
+    height: 40,
   },
   titleStyle: {
-    marginTop: 3,
+    marginTop: 20,
     fontSize: 18,
     fontWeight: "bold",
     marginLeft: 5,
   },
   textStyle: {
     textAlign: "center",
-    fontSize: 30,
+    fontSize: 34,
     marginTop: 15,
   },
   textStylePedometer: {

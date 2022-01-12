@@ -29,6 +29,8 @@ export default function GoalsTracker({stepVerticalToday}){
 const styles = StyleSheet.create({
     goalContainer: {
         padding: 5,
+        borderRadius: 5,
+        borderWidth: 3
     },
     textStyle: {
       fontSize: 20,

@@ -9,7 +9,9 @@ import * as SQLite from 'expo-sqlite';
 import { Context } from "../components/Context.js";
 import SQL_out from '../components/DB_Functions';
 import GoalsTracker from '../components/GoalsTracker';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 //import UpdateStepsList from '../components/UpdateStepsList';
+import getGoals from '../components/goals';
  
 const db = SQLite.openDatabase("db.db");
 
@@ -50,18 +52,34 @@ export default function TrackingScreen() {
 
   const [allData, onChangeAllData] = useState("allDataDefault");
   const [updateData, changeUpdateData] = useState(true);
-  
+
   console.log(allData);
+
+  var TotalStepCount = 0;
+  var TotalHeight = 0;
+
+  var nextGoalName = "";
+  var nextGoalElevation = 0;
+  var nextGoalLocation = "";
+
+  var PreviousGoalName = "";
+  var PreviousGoalElevation = 0;
+  var PreviousGoalLocation = "";
+
 
   if (updateData) { //will only run once
     console.log/("updated data!");
     SQL_out.getAllPreviousStepsDB(onChangeAllData);
     changeUpdateData(false);
+    
   }
   console.log(allData);
 
 
-
+  for (let index = 0; index < allData.length; index++) {
+    TotalStepCount += allData[index].stepsTaken;
+    TotalHeight += allData[index].heightTaken;         
+  }
 
 
 
@@ -100,34 +118,76 @@ export default function TrackingScreen() {
     SQL_out.getAllPreviousStepsDB(onChangeAllData);
   }
 
+  let goalData = getGoals();
+
+  const getTheGoals = () => {
+    console.log("ran!");
+    for (let index = 0; index < goalData.length; index++) {
+      if(goalData[index].elevation > TotalHeight){
+        if(index == 0){
+          PreviousGoalName = "N/A";
+          PreviousGoalElevation = 0;
+          PreviousGoalLocation = "N/A";
+        }
+        else{
+          PreviousGoalName = goalData[index - 1].name;
+          PreviousGoalElevation = goalData[index - 1].elevation;
+          PreviousGoalLocation = goalData[index - 1].location;
+        }
+        nextGoalName = goalData[index].name;
+        nextGoalElevation = goalData[index].elevation;
+        nextGoalLocation = goalData[index].location;
+        break;
+      }              
+    }
+  }
   
+  getTheGoals();
+
+    
+
   return (
     <View>
+      <TouchableOpacity onPress={() => getTheGoals()}>
       <View style={styles.container}>
-        <Text style={styles.statisticText}>Total Steps:</Text>
-        <Text style={styles.statisticText}>Total Height: </Text>        
+        <Text style={styles.statisticText}>Total Steps: <Text style={{fontWeight: 'bold'}}>{TotalStepCount}</Text></Text>
+        <Text style={styles.statisticText}>Total Height: <Text style={{fontWeight: 'bold'}}>{TotalHeight}m</Text></Text>        
+      </View>
+      <View style={styles.goalBox}>
+      <Text style={styles.textStyle}>You've just passed: <Text style={{fontWeight: 'bold'}}>{PreviousGoalName}</Text>, located in {PreviousGoalLocation}, and is <Text style={{fontWeight: 'bold'}}>{PreviousGoalElevation}m tall!</Text></Text>
+      <Text style={styles.textStyle}>Your next goal: <Text style={{fontWeight: 'bold'}}>{nextGoalName}</Text>, located in {nextGoalLocation}, is <Text style={{fontWeight: 'bold'}}>{nextGoalElevation}m tall!</Text></Text>
       </View>
       <Button
         title="Add data from today"
         onPress={() => AddOrUpdateSteps(allData)}
-      />
-      <View style={{height: "80%"}}>
+      />      
+      <View style={{height: "60%"}}>
         {allData == "allDataDefault" ? <Text>No data to load!</Text> : <PreviousStepsList allData={allData}/>}
       </View>
+      </TouchableOpacity>
     </View>
      );
    }
 
 const styles = StyleSheet.create({
+  textStyle:{
+    fontSize: 20,
+  },
   topbar: {
     marginTop: StatusBar.currentHeight || 0,
   },
   container: {
-    marginTop: 28,
+    padding: 11,
   },
   statisticText: {
     textAlign: "center",
-    fontSize: 20,
+    fontSize: 24,
+    
+  },
+  goalBox: {
+    borderRadius: 5,
+    borderWidth: 3,
+    margin: 2,
   }
 });
 

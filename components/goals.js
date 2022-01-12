@@ -54,6 +54,11 @@ const Goals = [
         "elevation" : 8611,
         "location" : "Nepal"
     },
+    {
+        "name" : "Kármán Line",
+        "elevation" : 100000,
+        "location" : "Outer Space"
+    },
 ]
 
 const getGoals = () => {
