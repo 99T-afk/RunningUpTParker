@@ -1,14 +1,8 @@
+/**
+ * @fileoverview - A flatlist component which displays the result of the SELECT ALL query
+ */
 import React, { useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, FlatList, SafeAreaView, TouchableOpacity} from 'react-native';
-import * as SQLite from 'expo-sqlite';
-import getLocations from "./Places";
-
-//SQL_lite DB for persistent data access
-//
-
-// Calls data, returns object of locations and their ID
-let data = getLocations();
 
 /**
  * Item - a component that renders each location on the flatlist

@@ -8,13 +8,9 @@ import PreviousStepsList from '../components/PreviousStepsList';
 import * as SQLite from 'expo-sqlite';
 import { Context } from "../components/Context.js";
 import SQL_out from '../components/DB_Functions';
-import GoalsTracker from '../components/GoalsTracker';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-//import UpdateStepsList from '../components/UpdateStepsList';
 import getGoals from '../components/goals';
  
 const db = SQLite.openDatabase("db.db");
-
 
 function getTodayFormatted(){
   var today = new Date();
@@ -23,22 +19,6 @@ function getTodayFormatted(){
   var yyyy = today.getFullYear();
   return today = dd + '/' + mm + '/' + yyyy;
 }
-
-
-/*
-function getAllPreviousStepsDB() {
-  const [allData, onChangeAllData] = useState("caffts");
-
-  useEffect(() => {
-    db.transaction((tx) => {tx.executeSql('SELECT * FROM previousSteps', null, (txObj, data ) => {onChangeAllData(data.rows._array)},
-    () => {console.log("Error - Select all failed")},
-    )});
-  }, []);
-
-  return allData;
-}
-*/
-
 
 export default function TrackingScreen() {
   const context = useContext(Context);

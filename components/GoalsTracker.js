@@ -1,11 +1,18 @@
+/**
+ * @fileoverview Gets and diplays the next goal to be reached.
+ */
 import React, { useState, useContext } from 'react';
 import { StyleSheet, Text, View, TextInput, Alert, Keyboard, TouchableWithoutFeedback, TouchableOpacity, Button } from 'react-native';
 import getGoals from './goals';
 
 let goalData = getGoals();
 
+/**
+ * GoalsTracker - gets the goal data, and checks current stepdata against it.
+ * @param {*} stepVerticalToday The current height to be measured/
+ * @returns Displays text stating the next goal.
+ */
 export default function GoalsTracker({stepVerticalToday}){
-    console.log("Goal tracker ran!")
     var nextGoalName = "";
     var nextGoalElevation = 0;
     var nextGoalLocation = "";

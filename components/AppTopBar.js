@@ -1,5 +1,5 @@
 /**
- * @fileoverview Displays a persistent header in the app, showing the logo and settings.
+ * @fileoverview Displays a persistent header in the app, showing the logo.
  */
  import * as React from "react";
  import {
@@ -10,6 +10,10 @@
  } from "react-native";
  import { useNavigation } from "@react-navigation/native";
 
+ /**
+  * The function that displays the top bar, and the image (logo)
+  * @returns The top bar, and a touchable image
+  */
  export default function TopBar() {
     const navigation = useNavigation();
     return (

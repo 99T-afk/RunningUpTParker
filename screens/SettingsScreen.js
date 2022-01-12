@@ -7,17 +7,21 @@
  import { StatusBar } from 'expo-status-bar';
  import SQL_out from '../components/DB_Functions';
 
- /**
-  * TESTING SCREEN
-  */
+/**
+ * A function which enables the user to "tap off" the keyboard to close it.  Useful as iphone keyboards do not have a return button.
+ * @param {*} children - all child props inside the component.
+ * @returns 
+ */
 const DismissKeyboard = ({ children }) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
     {children}
   </TouchableWithoutFeedback>
 );
 
-
-
+/**
+ * SettingsScreen - Displays settings and a small tutorial on how to use the app.
+ * @returns A screen giving the option to change step count and height, as well as instructions on using the app.
+ */
 export default function SettingsScreen() {
   const context = useContext(Context);
   const [stepHeight, onChangeStepHeight] = useState(context.stepsHeightOfSteps);

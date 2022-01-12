@@ -1,8 +1,15 @@
+/**
+ * @fileoverview Intialised a pedometer, which sends the data to a context.
+ */
 import React, {useState, useEffect, useContext} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Pedometer } from 'expo-sensors';
 import { Context } from '../components/Context';
 
+/**
+ * PedometerFunc - the pedometer set up as a function.
+ * @returns The pedometer step data, as it happens, to the context steps and height.
+ */
 export default function PedometerFunc() {
   const [isPedometerAvailable, setIsPedometerAvailable] = useState('checking');
   const [pastStepCount, setPastStepCount] = useState(0);
@@ -69,15 +76,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
-/*
-
-/////// OLD VIEW
-
-<View style={styles.container}>
-        <Text>Pedometer.isAvailableAsync(): {isPedometerAvailable}</Text>
-        <Text>Steps taken in the last 24 hours: {pastStepCount}</Text>
-        <Text>Walk! And watch this go up: {currentStepCount}</Text>
-      </View>
-
-*/

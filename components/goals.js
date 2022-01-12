@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Stores the goals for the program - their name, elevation and location.
+ */
 const Goals = [
     {
         "name" : "Mount Tenpō",

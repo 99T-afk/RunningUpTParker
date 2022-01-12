@@ -1,35 +1,29 @@
 /**
  * @fileoverview - Returns the run screen, which renders components for tracking steps
  */
- import React, { useState, useContext } from 'react';
- import { StatusBar } from 'expo-status-bar';
- import { StyleSheet, Text, View, Image, TextInput, Alert, Keyboard, TouchableWithoutFeedback, TouchableOpacity, Button, Platform } from 'react-native';
- //import { TouchableOpacity } from "react-native-gesture-handler";
- import PedometerComp from '../components/PedometerComp';
- import { Context } from '../components/Context';
- import StepsHeightDisplay from '../components/StepsHeightDisplay';
+import React, { useState, useContext } from 'react';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View, Image, TextInput, Alert, Keyboard, TouchableWithoutFeedback, TouchableOpacity, Button, Platform } from 'react-native';
+import { Context } from '../components/Context';
 import PedometerFunc from '../components/PedometerFunc';
 import GoalsTracker from '../components/GoalsTracker'; 
 
 
- /**
-  * TESTING SCREEN
-  */
+/**
+ * A function which enables the user to "tap off" the keyboard to close it.  Useful as iphone keyboards do not have a return button.
+ * @param {*} children - all child props inside the component.
+ * @returns 
+ */
 const DismissKeyboard = ({ children }) => (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       {children}
     </TouchableWithoutFeedback>
   );
 
-  /*
-const AddSteps = () => {
-  var newStepVerticalToday = (stepHeight * stepCount) / 100;
-  var newStepCountToday = (stepCount * 2) + stepCount
-  onChangeStepCountToday(newStepCountToday);
-  onChangeStepVerticalToday(newStepVerticalToday);
-}
-*/
-
+/**
+ * RunScreen - Main functionality of the program.
+ * @returns A screen showing the step count, vertical distance covered, goals, and button input.
+ */
 export default function RunScreen() {
   const [recordingAction, recordingActionUpdate] = useState(false); //true = button
   const [stepHeight, onChangeStepHeight] = useState(20);
@@ -37,20 +31,17 @@ export default function RunScreen() {
   const [stepVerticalToday, onChangeStepVerticalToday] = useState(0);
   const [stepCountToday, onChangeStepCountToday] = useState(0);
   const context = useContext(Context);
-  console.log(">>> context.stepVerticalToday: " + context.stepVerticalToday);
 
-//<StepsHeightDisplay stepVerticalToday={stepVerticalToday} stepCountToday={stepCountToday}/>
-
-     return (
-      <DismissKeyboard>
-       <View>
-         <View style={styles.bumperTopBar}></View>
-       <View style={{justifyContent: 'space-evenly', flexDirection: "row"}}>
+  return (
+    <DismissKeyboard>
+      <View>
+        <View style={styles.bumperTopBar}></View>
+      <View style={{justifyContent: 'space-evenly', flexDirection: "row"}}>
             <Text style={styles.statisticText}>Total Steps:</Text>
             <Text style={styles.statisticText}>Height today:</Text>   
-         </View>
-       <View style={styles.containerSettings}>
-         
+        </View>
+      <View style={styles.containerSettings}>
+        
                   <View
                     style={[
                       styles.container,
@@ -143,8 +134,8 @@ export default function RunScreen() {
             </TouchableOpacity><Text style={{marginTop: 2}}>Note - Number of steps and the height can be changed in settings.</Text></View>}</View>
           </View>
       </DismissKeyboard>
-     );
-   }
+    );
+  }
 
 const styles = StyleSheet.create({
   topbar: {

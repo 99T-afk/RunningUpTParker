@@ -12,8 +12,6 @@ import TrackingScreen from "./screens/TrackingScreen";
 import RunScreen from "./screens/RunScreen";
 import SettingsScreen from "./screens/SettingsScreen";
 import AppTopBar from "./components/AppTopBar";
-import PedometerScreen from "./screens/PedometerScreen";
-
 
 const Tab = createMaterialTopTabNavigator();
 const StackNav = createNativeStackNavigator();
@@ -71,7 +69,7 @@ function MyTabs() {
 }
 
 /**
- * StackNav - a function that defines the stack navigator that encapsulates the entire project.
+ * StackNavComponent - a function that defines the stack navigator that encapsulates the entire project.
  * @returns 
  */
  const StackNavComponent = () => {
@@ -105,6 +103,10 @@ function MyTabs() {
   );
 };
 
+/**
+ * App - the entrypoint for the application
+ * @returns The context, the context provider and navigation for the entire app.
+ */
 export default function App() {
   const [context, setContext] = useState(0); //was 0
 
@@ -165,10 +167,3 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
   },
 });
-
-
-/*
-
-
-
-      */
