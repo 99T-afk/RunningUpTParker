@@ -37,23 +37,59 @@ export default function RunScreen() {
   const [stepVerticalToday, onChangeStepVerticalToday] = useState(0);
   const [stepCountToday, onChangeStepCountToday] = useState(0);
   const context = useContext(Context);
-  console.log(">>> context.stepVerticalToday: " +context.stepVerticalToday);
+  console.log(">>> context.stepVerticalToday: " + context.stepVerticalToday);
 
 //<StepsHeightDisplay stepVerticalToday={stepVerticalToday} stepCountToday={stepCountToday}/>
 
      return (
       <DismissKeyboard>
        <View>
-            <View style={styles.walkingText}>
-              <Text style={styles.statisticText}>Steps from button: {stepCountToday}</Text>
-              <Text style={styles.statisticText}>Steps from pedometer: {context.stepsToday}</Text>
-              <Text style={styles.statisticText}>Total Steps: {stepCountToday + context.stepsToday}</Text>
-              <Text style={styles.statisticText}>Height today: {context.stepVerticalToday}m</Text>        
-            </View>
+         <View style={styles.bumperTopBar}></View>
+       <View style={{justifyContent: 'space-evenly', flexDirection: "row"}}>
+            <Text style={styles.statisticText}>Total Steps:</Text>
+            <Text style={styles.statisticText}>Height today:</Text>   
+         </View>
+       <View style={styles.containerSettings}>
+         
+                  <View
+                    style={[
+                      styles.container,
+                      {
+                        flexDirection: "row",
+                      },
+                    ]}
+                  >
+                    <View style={styles.outerBoxStyle}>
+                      <View
+                        style={
+                          (styles.opacityStyle, { flex: 1, height: 50 })}
+                      >
+                        <TouchableOpacity
+                          theme="Button"
+                          style={{ height: "100%" }}
+                        >
+                          <Text style={styles.textStyle}>{context.stepsToday}</Text>
+                        </TouchableOpacity>
+                      </View>
+                      <View
+                        style={
+                          (styles.opacityStyle, { flex: 1, height: 50 })}                      
+                      >
+                        <TouchableOpacity
+                          theme="Pedometer"
+                          style={{ height: "100%" }}                        
+                        >
+                          <Text style={styles.textStyle}>{context.stepVerticalToday}m</Text>
+                        </TouchableOpacity>               
+                      </View>
+                    </View>
+                  </View>
+                </View> 
+
+            
               <View style={styles.topbar}>
               <GoalsTracker stepVerticalToday = {context.stepVerticalToday}/>
-                  <Text style={styles.titleStyle}>Select the recording action:</Text>
-                  {!recordingAction ? <Text>Using Button!</Text> : <Text>Using Pedometer!</Text> }
+                  <Text style={styles.titleStyle}>Select the recording action:</Text>              
                   <View style={styles.buttonContainer}>        
                     <TouchableOpacity
                       style={styles.buttonSwitch}
@@ -68,6 +104,9 @@ export default function RunScreen() {
                       style={styles.buttonSwitch}
                       onPress={() => {
                         recordingActionUpdate(true);
+                        if(Platform.OS === 'android'){
+                          alert("Error - Sorry, but at this time, the pedometer function is only supported on IOS devices. ")
+                        }
                         console.log("touchable pedometer pressed");
                       }}>
                     <Text>Pedometer</Text>
@@ -76,20 +115,22 @@ export default function RunScreen() {
             </View>
               
               <View>{recordingAction ? (
-                <View style={{marginTop: 50}}>
+                <View style={{marginTop: "5%", padding: 5}}>
                   <PedometerFunc></PedometerFunc>
+                  <TouchableWithoutFeedback 
+                  style={styles.completedStepBoxPedometer}
+                  >
+                    <Text style={styles.textStyle}>Pedometer active, start walking!</Text>
+                  </TouchableWithoutFeedback>
                   </View>) : 
-                <View style={{marginTop: "5%"}}>
+                <View style={{marginTop: "5%", padding: 5}}>
                   <TouchableOpacity 
                   style={styles.completedStepBox}
                   onPress={() => {
-
-                  
-
-                  context.addVerticalToday((context.stepsCount * 2), context.stepsHeightOfSteps);
-                  context.addStepsToday((context.stepsCount * 2));
-                }}
-                >
+                    context.addVerticalToday((context.stepsCount * 2), context.stepsHeightOfSteps);
+                    context.addStepsToday((context.stepsCount * 2));
+                  }}
+                  >
               <Text style={styles.textStyle}>Completed a trip</Text>
               
             </TouchableOpacity></View>}</View>
@@ -100,11 +141,14 @@ export default function RunScreen() {
 
 const styles = StyleSheet.create({
   topbar: {
-    marginTop: StatusBar.currentHeight || 10,
+    marginTop: StatusBar.currentHeight || 150,
+  },
+  bumperTopBar: {
+    marginTop: 30
   },
   container: {
     flex: 1,
-    padding: 15,
+    padding: 10,
   },
   containerSettings: {
     marginLeft: 5,
@@ -115,7 +159,7 @@ const styles = StyleSheet.create({
     flexDirection: "row"
   },
   statisticText: {
-    fontSize: 22,
+    fontSize: 16,
   },
   outerBoxStyle: {
     backgroundColor: "#fffefc",
@@ -140,10 +184,18 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     textAlign: "center",
-    fontSize: 20,
+    fontSize: 30,
     marginTop: 15,
   },
   completedStepBox: {
+    borderWidth: 3,
+    borderRadius: 5,
+    padding: 10,
+    height: 200,
+    paddingTop: 50,
+  },
+  completedStepBoxPedometer: {
+    backgroundColor: "#b8b8b8",
     borderWidth: 3,
     borderRadius: 5,
     padding: 10,
@@ -246,3 +298,12 @@ const styles = StyleSheet.create({
                   onChangeStepCountToday(newStepCountToday);
                   onChangeStepVerticalToday(newStepVerticalToday);     
                   */
+                
+                //////////// OLD RECORDING ACTION TEXT
+                //{!recordingAction ? <Text>Using Button!</Text> : <Text>Using Pedometer!</Text> }
+
+                //////////////// updated walking text:
+            //     <View style={styles.walkingText}>
+            //   <Text style={styles.statisticText}>Total Steps: {context.stepsToday}</Text>
+            //   <Text style={styles.statisticText}>Height today: {context.stepVerticalToday}m</Text>        
+            // </View>

@@ -57,11 +57,7 @@ export default function PedometerFunc() {
   },[])
 
     return (
-      <View style={styles.container}>
-        <Text>Pedometer.isAvailableAsync(): {isPedometerAvailable}</Text>
-        <Text>Steps taken in the last 24 hours: {pastStepCount}</Text>
-        <Text>Walk! And watch this go up: {currentStepCount}</Text>
-      </View>
+      <View></View>
     );
 }
 
@@ -73,3 +69,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+/*
+
+/////// OLD VIEW
+
+<View style={styles.container}>
+        <Text>Pedometer.isAvailableAsync(): {isPedometerAvailable}</Text>
+        <Text>Steps taken in the last 24 hours: {pastStepCount}</Text>
+        <Text>Walk! And watch this go up: {currentStepCount}</Text>
+      </View>
+
+*/

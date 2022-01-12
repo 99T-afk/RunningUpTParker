@@ -21,7 +21,7 @@ export default function GoalsTracker({stepVerticalToday}){
 
     return(
         <View>
-            <Text>Your next goal: {nextGoalName}, located at {nextGoalLocation}, is {nextGoalElevation}m tall!</Text>
+            <Text>Your next goal: {nextGoalName}, located in {nextGoalLocation}, is {nextGoalElevation}m tall!</Text>
         </View>
     )
 }
