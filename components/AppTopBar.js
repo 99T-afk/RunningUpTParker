@@ -38,9 +38,9 @@
     },
     imageStyle: {
       width: 140,
-      height: 48,
+      height: 46,
       marginLeft: 7,
-      padding: 2,
+      padding: 4,
       resizeMode: 'contain'
     },
     settingIcon: {

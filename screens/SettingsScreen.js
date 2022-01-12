@@ -32,26 +32,29 @@ export default function SettingsScreen() {
 
     return (
       <DismissKeyboard>
-        <View style={styles.topbar}>
-          <View style={styles.buttonContainer}>
-            <Text style={styles.inputIn}>Step height (cm): </Text>
-            <TextInput
+        <View style={{paddingTop: 4,}}>
+          <Text style={{fontSize: 18, paddingLeft: 3}}>Change the number of steps below: </Text>
+          <View style={styles.topbar}>
+            <View style={styles.buttonContainer}>
+              <Text style={styles.inputIn}>Step height (cm): </Text>
+              <TextInput
+                    style={styles.inputIn}
+                    onChangeText={stepHeight => heightTextChange(stepHeight)}
+                    value={stepHeight.toString()}
+                    placeholder="Step Height (cm)"
+                    keyboardType="numeric"
+                />
+            </View>
+            <View style={styles.buttonContainer}>
+              <Text style={styles.inputIn}>Number of Steps: </Text>
+              <TextInput
                   style={styles.inputIn}
-                  onChangeText={stepHeight => heightTextChange(stepHeight)}
-                  value={stepHeight.toString()}
-                  placeholder="Step Height (cm)"
+                  onChangeText={stepCount => stepCountChange(stepCount)}
+                  value={stepCount.toString()}
+                  placeholder="Number of steps"
                   keyboardType="numeric"
-              />
-          </View>
-          <View style={styles.buttonContainer}>
-            <Text style={styles.inputIn}>Number of Steps: </Text>
-            <TextInput
-                style={styles.inputIn}
-                onChangeText={stepCount => stepCountChange(stepCount)}
-                value={stepCount.toString()}
-                placeholder="Number of steps"
-                keyboardType="numeric"
-              />
+                />
+            </View>
           </View>
         </View>
       </DismissKeyboard>
@@ -61,14 +64,17 @@ export default function SettingsScreen() {
 
 const styles = StyleSheet.create({
   topbar: {
-    marginTop: StatusBar.currentHeight || 20,
+    height: 90,
+    borderWidth: 3,
+    borderRadius: 5
   },
   buttonContainer: {
-    marginTop: 20,
+    marginTop: 7,
     flexDirection: "row",
   },
   inputIn: {
     fontSize: 22,
+    paddingLeft: 4,
   },
   buttonSwitch: {
     alignItems: "center",
