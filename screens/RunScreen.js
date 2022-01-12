@@ -75,47 +75,24 @@ export default function RunScreen() {
                   </View>     
             </View>
               
-              <View>{recordingAction ? (<View style={{marginTop: 50}}><PedometerFunc></PedometerFunc></View>) : 
-              <View style={{marginTop: "5%"}}>
-                <TouchableOpacity 
-                style={styles.completedStepBox}
-                onPress={() => {
-                  var newStepVerticalToday = ((stepHeight / 100) * stepCount) + stepVerticalToday;
-                  var newStepCountToday = (stepCount * 2) + stepCountToday;
-                  onChangeStepCountToday(newStepCountToday);
-                  onChangeStepVerticalToday(newStepVerticalToday);     
+              <View>{recordingAction ? (
+                <View style={{marginTop: 50}}>
+                  <PedometerFunc></PedometerFunc>
+                  </View>) : 
+                <View style={{marginTop: "5%"}}>
+                  <TouchableOpacity 
+                  style={styles.completedStepBox}
+                  onPress={() => {
 
                   
 
-                  var stepHeight = context.stepsHeightOfSteps;
-                  context.addVerticalToday(1, stepHeight);
-
-                  context.addStepsToday(10);
+                  context.addVerticalToday((context.stepsCount * 2), context.stepsHeightOfSteps);
+                  context.addStepsToday((context.stepsCount * 2));
                 }}
                 >
               <Text style={styles.textStyle}>Completed a trip</Text>
               
             </TouchableOpacity></View>}</View>
-
-            <View>
-            
-            <Text style={styles.inputIn}>Step height (cm): </Text>
-            <TextInput
-              style={styles.inputIn}
-              onChangeText={stepHeight => onChangeStepHeight(stepHeight)}
-              value={context.stepsHeightOfSteps.toString()}
-              placeholder="Step Height (cm)"
-              keyboardType="numeric"
-            />
-            <Text style={styles.inputIn}>Step count: </Text>
-            <TextInput
-              style={styles.inputIn}
-              onChangeText={stepCount => onChangeStepCount(stepCount)}
-              value={stepCount.toString()}
-              placeholder="Step count"
-              keyboardType="numeric"
-            />    
-            </View>
           </View>
       </DismissKeyboard>
      );
@@ -251,4 +228,21 @@ const styles = StyleSheet.create({
                   </View>
                 </View> 
 
-*/
+
+
+
+                ////////////////////// OLD STEP COUNTERS:
+                <View style={styles.walkingText}>
+                  <Text style={styles.statisticText}>Steps from button: {stepCountToday}</Text>
+                  <Text style={styles.statisticText}>Steps from pedometer: {context.stepsToday}</Text>
+                  <Text style={styles.statisticText}>Total Steps: {stepCountToday + context.stepsToday}</Text>
+                  <Text style={styles.statisticText}>Height today: {context.stepVerticalToday}m</Text>        
+                </View>
+
+                //////////////////// OLD BUTTON ONPRESS:
+                                  /*
+                  var newStepVerticalToday = ((stepHeight / 100) * stepCount) + stepVerticalToday;
+                  var newStepCountToday = (stepCount * 2) + stepCountToday;
+                  onChangeStepCountToday(newStepCountToday);
+                  onChangeStepVerticalToday(newStepVerticalToday);     
+                  */
