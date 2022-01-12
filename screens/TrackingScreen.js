@@ -33,22 +33,22 @@ export default function TrackingScreen() {
   const [allData, onChangeAllData] = useState("allDataDefault");
   const [updateData, changeUpdateData] = useState(true);
 
-  console.log(allData);
-
   var TotalStepCount = 0;
   var TotalHeight = 0;
 
+  //stores the next goal
   var nextGoalName = "";
   var nextGoalElevation = 0;
   var nextGoalLocation = "";
 
+  //stores the goal just passed
   var PreviousGoalName = "";
   var PreviousGoalElevation = 0;
   var PreviousGoalLocation = "";
 
 
   if (updateData) { //will only run once
-    console.log/("updated data!");
+    //SQL_out.addNewSteps(today, 1250, 254)
     SQL_out.getAllPreviousStepsDB(onChangeAllData);
     changeUpdateData(false);
     
@@ -65,11 +65,10 @@ export default function TrackingScreen() {
   //get all records, if today is blank, create a row
   //if today is present, update with current data IF new data is greater.
   const AddOrUpdateSteps = (allData) => {
-    console.log("AddOrUpdateSteps called");
     
     //GET DATA HERE FROM CONTEXT
-    var stepsToday = context.stepsToday;
-    var verticalToday = context.stepVerticalToday;
+    //var stepsToday = context.stepsToday;
+    //var verticalToday = context.stepVerticalToday;
 
     var today = getTodayFormatted();
 
@@ -77,8 +76,8 @@ export default function TrackingScreen() {
     for (let index = 0; index < allData.length; index++) {
       if(allData[index].dateStep == today){
         //is today, update
-        var newSteps = allData[index].stepsTaken + stepsToday //<<<< ADD STEPS FROM CONTEXT
-        var newHeight = allData[index].heightTaken + verticalToday //<<<< ADD HEIGHT FROM CONTEXT
+        var newSteps = allData[index].stepsTaken + context.stepsToday
+        var newHeight = allData[index].heightTaken + context.stepVerticalToday
         SQL_out.updateSteps(today, newSteps, newHeight);  
         doesDateExistQ = true;    
       }
@@ -86,7 +85,7 @@ export default function TrackingScreen() {
 
     //no record exists, create one for today
     if(doesDateExistQ == false){
-      SQL_out.addNewSteps(today, stepsToday, verticalToday);
+      SQL_out.addNewSteps(today, context.stepsToday, context.stepVerticalToday);
     }
 
     changeUpdateData(true);
