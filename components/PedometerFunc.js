@@ -15,13 +15,12 @@ export default function PedometerFunc() {
     _subscription = Pedometer.watchStepCount(result => {
       setCurrentStepCount(result.steps);
       
-      
+      //add steps to the context
       context.addStepsToday(result.steps);
 
+      //add vertical height to the context
       var stepHeight = context.stepsHeightOfSteps
       context.addVerticalToday(result.steps, stepHeight);
-      //if breaks (result.steps)
-
     });
 
     Pedometer.isAvailableAsync().then(

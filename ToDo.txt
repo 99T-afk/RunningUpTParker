@@ -1,13 +1,11 @@
-TODO:
 
+DONE:
 - save data to context
-
 - Add update function for steps
-
 - Save steps to DB
 
-- Fix pedometer (works on iphone)
-
+TODO:
+- Convert all to use context
+- Update UI
 - Add FAQ section
-
 - Add gifs for explanation

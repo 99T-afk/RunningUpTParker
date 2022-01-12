@@ -19,9 +19,15 @@ const DismissKeyboard = ({ children }) => (
 export default function SettingsScreen() {
   const context = useContext(Context);
   const [stepHeight, onChangeStepHeight] = useState(context.stepsHeightOfSteps);
+  const [stepCount, onChangeStepCount] = useState(context.stepsCount)
+
   const heightTextChange = (newHeight) => {
     onChangeStepHeight(newHeight);
     context.changeStepHeight(parseInt(newHeight));
+  };
+  const stepCountChange = (newStepCount) => {
+    onChangeStepCount(newStepCount);
+    context.updateStepCount(parseInt(newStepCount));
   };
 
     return (
@@ -37,6 +43,16 @@ export default function SettingsScreen() {
                   keyboardType="numeric"
               />
           </View>
+          <View style={styles.buttonContainer}>
+            <Text style={styles.inputIn}>Number of Steps: </Text>
+            <TextInput
+                style={styles.inputIn}
+                onChangeText={stepCount => stepCountChange(stepCount)}
+                value={stepCount.toString()}
+                placeholder="Number of steps"
+                keyboardType="numeric"
+              />
+          </View>
         </View>
       </DismissKeyboard>
     );
@@ -45,10 +61,10 @@ export default function SettingsScreen() {
 
 const styles = StyleSheet.create({
   topbar: {
-    marginTop: StatusBar.currentHeight || 0,
+    marginTop: StatusBar.currentHeight || 20,
   },
   buttonContainer: {
-    marginTop: 28,
+    marginTop: 20,
     flexDirection: "row",
   },
   inputIn: {
