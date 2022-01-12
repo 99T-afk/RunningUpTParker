@@ -3,7 +3,7 @@
  */
  import React, { useState, useContext } from 'react';
  import { StatusBar } from 'expo-status-bar';
- import { StyleSheet, Text, View, TextInput, Alert, Keyboard, TouchableWithoutFeedback, TouchableOpacity, Button, Platform } from 'react-native';
+ import { StyleSheet, Text, View, Image, TextInput, Alert, Keyboard, TouchableWithoutFeedback, TouchableOpacity, Button, Platform } from 'react-native';
  //import { TouchableOpacity } from "react-native-gesture-handler";
  import PedometerComp from '../components/PedometerComp';
  import { Context } from '../components/Context';
@@ -97,7 +97,7 @@ export default function RunScreen() {
                         recordingActionUpdate(false);
                         console.log("touchable btn pressed");
                       }}>
-                    <Text>Button</Text>
+                    <Text style={{fontSize: 18}}>Button</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
@@ -109,7 +109,7 @@ export default function RunScreen() {
                         }
                         console.log("touchable pedometer pressed");
                       }}>
-                    <Text>Pedometer</Text>
+                    <Text style={{fontSize: 18}}>Pedometer</Text>
                     </TouchableOpacity>
                   </View>     
             </View>
@@ -121,7 +121,12 @@ export default function RunScreen() {
                   style={styles.completedStepBoxPedometer}
                   >
                     <Text style={styles.textStyle}>Pedometer active, start walking!</Text>
+                    
                   </TouchableWithoutFeedback>
+                  <Image
+                      style={styles.imageStyle}
+                      source={require("../assets/walkingUpGuy.png")}
+                    />
                   </View>) : 
                 <View style={{marginTop: "5%", padding: 5}}>
                   <TouchableOpacity 
@@ -131,9 +136,9 @@ export default function RunScreen() {
                     context.addStepsToday((context.stepsCount * 2));
                   }}
                   >
-              <Text style={styles.textStyle}>Completed a trip</Text>
+              <Text style={styles.textStylePedometer}>Completed a trip!</Text>
               
-            </TouchableOpacity></View>}</View>
+            </TouchableOpacity><Text style={{marginTop: 2}}>Note - Number of steps and the height can be changed in settings.</Text></View>}</View>
           </View>
       </DismissKeyboard>
      );
@@ -141,10 +146,18 @@ export default function RunScreen() {
 
 const styles = StyleSheet.create({
   topbar: {
-    marginTop: StatusBar.currentHeight || 150,
+    marginTop: StatusBar.currentHeight || 120,
   },
   bumperTopBar: {
     marginTop: 30
+  },
+  imageStyle: {
+    width: 100,
+    height: 100,
+    padding: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+    resizeMode: 'contain'
   },
   container: {
     flex: 1,
@@ -178,7 +191,7 @@ const styles = StyleSheet.create({
   },
   titleStyle: {
     marginTop: 3,
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: "bold",
     marginLeft: 5,
   },
@@ -187,20 +200,27 @@ const styles = StyleSheet.create({
     fontSize: 30,
     marginTop: 15,
   },
+  textStylePedometer: {
+    textAlign: "center",
+    fontSize: 30,
+    color: 'white',
+    marginTop: 15,
+  },
   completedStepBox: {
+    backgroundColor: "#ff7c3b",
     borderWidth: 3,
     borderRadius: 5,
     padding: 10,
-    height: 200,
-    paddingTop: 50,
+    height: 170,
+    paddingTop: 40,
   },
   completedStepBoxPedometer: {
     backgroundColor: "#b8b8b8",
     borderWidth: 3,
     borderRadius: 5,
     padding: 10,
-    height: 200,
-    paddingTop: 50,
+    height: 170,
+    paddingTop: 40,
   },
   walkingText: {
     marginTop: 28,   

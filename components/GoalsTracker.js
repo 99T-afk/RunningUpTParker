@@ -20,8 +20,17 @@ export default function GoalsTracker({stepVerticalToday}){
     }
 
     return(
-        <View>
-            <Text>Your next goal: {nextGoalName}, located in {nextGoalLocation}, is {nextGoalElevation}m tall!</Text>
+        <View style={styles.goalContainer}>
+            <Text style={styles.textStyle}>Your next goal: {nextGoalName}, located in {nextGoalLocation}, is <Text style={{fontWeight: 'bold'}}>{nextGoalElevation}m tall!</Text></Text>
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    goalContainer: {
+        padding: 5,
+    },
+    textStyle: {
+      fontSize: 20,
+    }
+})

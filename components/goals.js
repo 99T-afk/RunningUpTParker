@@ -12,7 +12,7 @@ const Goals = [
     {
         "name" : "Mount Whycheproof",
         "elevation" : 43,
-        "location" : "Victoria, Japan"
+        "location" : "Victoria, Australia"
     },
     {
         "name" : "Statue of Liberty",
@@ -43,6 +43,11 @@ const Goals = [
         "name" : "Scafell Pike",
         "elevation" : 978,
         "location" : "Cumbria, England"
+    },
+    {
+        "name" : "Mt. Warning",
+        "elevation" : 1159,
+        "location" : "NSW, Australia"
     },
     {
         "name" : "K2",

@@ -2,8 +2,7 @@
  * @fileoverview App.js - default entry point for the application.
  */
 import React, { useState } from "react";
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, StatusBar } from 'react-native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Context } from "./components/Context.js";
 import { AntDesign, Feather, FontAwesome5, Entypo } from "@expo/vector-icons";
@@ -12,6 +11,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import TrackingScreen from "./screens/TrackingScreen";
 import RunScreen from "./screens/RunScreen";
 import SettingsScreen from "./screens/SettingsScreen";
+import AppTopBar from "./components/AppTopBar";
 import PedometerScreen from "./screens/PedometerScreen";
 
 
@@ -140,6 +140,7 @@ export default function App() {
     <Context.Provider value={contextObject}>     
       <NavigationContainer>
         <View style={styles.topbar}>
+          <AppTopBar/>
         </View>
         <StackNavComponent/>
       </NavigationContainer>     
