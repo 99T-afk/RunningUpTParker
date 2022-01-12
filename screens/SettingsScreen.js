@@ -64,26 +64,31 @@ export default function SettingsScreen() {
         <View style={{paddingTop: 4,}}>
           <Text style={styles.headerText}>Change the number of steps below: </Text>
           <View style={styles.topbar}>
-            <View style={styles.buttonContainer}>
-              <Text style={styles.inputIn}>Step height (cm): </Text>
-              <TextInput
+            <View>
+              <View style={styles.buttonContainer}>
+                <Text style={styles.inputIn}>Step height (cm): </Text>
+                <TextInput
+                      style={styles.inputIn}
+                      onChangeText={stepHeight => heightTextChange(stepHeight)}
+                      value={stepHeight.toString()}
+                      placeholder="Step Height (cm)"
+                      keyboardType="numeric"
+                  />
+              </View>
+              <View style={styles.buttonContainer}>
+                <Text style={styles.inputIn}>Number of Steps: </Text>
+                <TextInput
                     style={styles.inputIn}
-                    onChangeText={stepHeight => heightTextChange(stepHeight)}
-                    value={stepHeight.toString()}
-                    placeholder="Step Height (cm)"
+                    onChangeText={stepCount => stepCountChange(stepCount)}
+                    value={stepCount.toString()}
+                    placeholder="Number of steps"
                     keyboardType="numeric"
-                />
+                  />
+              </View>
             </View>
-            <View style={styles.buttonContainer}>
-              <Text style={styles.inputIn}>Number of Steps: </Text>
-              <TextInput
-                  style={styles.inputIn}
-                  onChangeText={stepCount => stepCountChange(stepCount)}
-                  value={stepCount.toString()}
-                  placeholder="Number of steps"
-                  keyboardType="numeric"
-                />
-            </View>
+            <TouchableOpacity style={{marginLeft: 80, marginTop: 10, height: 50, width: 70, justifyContent: "center", backgroundColor: "#ff7c3b", borderRadius: 5}} onPress={() => alert("Configuration saved!")}>
+              <Text style={{alignSelf: "center"}}>Update</Text>
+            </TouchableOpacity>
           </View>
           
             <View>
@@ -126,7 +131,8 @@ const styles = StyleSheet.create({
     height: 90,
     borderWidth: 3,
     borderRadius: 5,
-    marginTop: 5
+    marginTop: 5,
+    flexDirection: "row"
   },
   buttonContainer: {
     marginTop: 7,
