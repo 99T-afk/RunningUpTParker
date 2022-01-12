@@ -125,7 +125,7 @@ export default function App() {
     },
     stepsHeightOfSteps: stepsHeightOfSteps,
     changeStepHeight: (stepIn) => {
-      updateStepHeight(stepIn)
+      updateStepHeight(stepIn);
     },
     stepsCount: 0,
     

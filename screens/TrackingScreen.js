@@ -48,14 +48,13 @@ export default function TrackingScreen() {
 
   var today = getTodayFormatted();
 
-  var stepsTaken = 3;
-  var heightTaken = 4;
-
-
   const [allData, onChangeAllData] = useState("allDataDefault");
   const [updateData, changeUpdateData] = useState(true);
+  
   console.log(allData);
+
   if (updateData) { //will only run once
+    console.log/("updated data!");
     SQL_out.getAllPreviousStepsDB(onChangeAllData);
     changeUpdateData(false);
   }
@@ -97,8 +96,8 @@ export default function TrackingScreen() {
       SQL_out.addNewSteps(today, stepsToday, verticalToday);
     }
 
-
     changeUpdateData(true);
+    SQL_out.getAllPreviousStepsDB(onChangeAllData);
   }
 
   

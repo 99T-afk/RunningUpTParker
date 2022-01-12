@@ -87,7 +87,7 @@ export default function RunScreen() {
 
                   
 
-                  var stepHeight = context.stepsHeightOfSteps
+                  var stepHeight = context.stepsHeightOfSteps;
                   context.addVerticalToday(1, stepHeight);
 
                   context.addStepsToday(10);
@@ -103,7 +103,7 @@ export default function RunScreen() {
             <TextInput
               style={styles.inputIn}
               onChangeText={stepHeight => onChangeStepHeight(stepHeight)}
-              value={stepHeight.toString()}
+              value={context.stepsHeightOfSteps.toString()}
               placeholder="Step Height (cm)"
               keyboardType="numeric"
             />
