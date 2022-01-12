@@ -2,7 +2,7 @@
  * @fileoverview - Returns the homescreen, which calls a flatlist component to render.
  */
  import React, { useState, useEffect, useContext } from 'react';
- import { View, Text, Button, TouchableWithoutFeedback, Keyboard, StyleSheet, TouchableOpacity, TextInput, Image, ScrollView, Alert, BackHandler } from 'react-native';
+ import { View, Text, Button, TouchableWithoutFeedback, Keyboard, StyleSheet, TouchableOpacity, TextInput, Image, ScrollView, Alert, BackHandler, Platform } from 'react-native';
  import { Context } from '../components/Context';
  import { StatusBar } from 'expo-status-bar';
  import SQL_out from '../components/DB_Functions';
@@ -86,9 +86,12 @@ export default function SettingsScreen() {
                   />
               </View>
             </View>
-            <TouchableOpacity style={{marginLeft: 80, marginTop: 10, height: 50, width: 70, justifyContent: "center", backgroundColor: "#ff7c3b", borderRadius: 5}} onPress={() => alert("Configuration saved!")}>
-              <Text style={{alignSelf: "center"}}>Update</Text>
-            </TouchableOpacity>
+            {Platform.OS === 'android' ? <View  style={{marginTop: 15, paddingRight: 10, right: 60}}><Button title="Update" onPress={() => alert("Configuration saved!")}></Button></View> 
+            : <TouchableOpacity style={{marginLeft: 80, marginTop: 10, height: 50, width: 70, justifyContent: "center", backgroundColor: "#ff7c3b", borderRadius: 5}} onPress={() => alert("Configuration saved!")}>
+            <Text style={{alignSelf: "center"}}>Update</Text>
+          </TouchableOpacity>}
+            
+            
           </View>
           
             <View>
